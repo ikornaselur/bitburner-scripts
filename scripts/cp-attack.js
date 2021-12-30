@@ -12,7 +12,6 @@ export async function main(ns) {
     ns.print("Copying attack script to servers");
     for (const server of SERVERS) {
         ns.print(`[${server}] Checking server...`);
-        await ns.sleep(100);
         if (!ns.hasRootAccess(server)) {
             // Skip the servers without root access
             ns.print(`[${server}] No root access!`);
@@ -20,7 +19,6 @@ export async function main(ns) {
         }
         ns.print(`[${server}] Copying script`);
         await ns.scp(["/scripts/utils.js", "/scripts/attack.js"], server);
-        await ns.sleep(100);
 
         const availMem = ns.getServerMaxRam(server);
         let threads = Math.floor(availMem / RAM_REQUIREMENTS);
@@ -49,7 +47,6 @@ export async function main(ns) {
     let server = `serv-${i}`;
     while (ns.serverExists(server)) {
         await ns.scp(["/scripts/utils.js", "/scripts/attack.js"], server);
-        await ns.sleep(100);
 
         const availMem = ns.getServerMaxRam(server);
         let threads = Math.floor(availMem / RAM_REQUIREMENTS);
@@ -61,7 +58,6 @@ export async function main(ns) {
         }
 
         ns.killall(server);
-        ns.exec("/scripts/utils.js", server);
         ns.exec(
             "/scripts/attack.js",
             server,

@@ -58,7 +58,7 @@ export async function main(ns) {
     for (const server of SERVERS_PORT_4) {
         if (!ns.hasRootAccess(server)) {
             ns.sqlinject(server);
-            ns.worm(server);
+            ns.httpworm(server);
             ns.ftpcrack(server);
             ns.brutessh(server);
             ns.nuke(server);
@@ -71,9 +71,9 @@ export async function main(ns) {
 
     for (const server of SERVERS_PORT_5) {
         if (!ns.hasRootAccess(server)) {
-            ns.relaysmpt(server);
+            ns.relaysmtp(server);
             ns.sqlinject(server);
-            ns.worm(server);
+            ns.httpworm(server);
             ns.ftpcrack(server);
             ns.brutessh(server);
             ns.nuke(server);

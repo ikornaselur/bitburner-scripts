@@ -23,16 +23,12 @@ export async function main(ns) {
     results.sort((a, b) => a.maxMoney - b.maxMoney);
 
     ns.print("--- No root access ---");
-    for (const result of results.filter(res => !res.rootAccess)) {
-        ns.print(
-            `[${result.server}] ${humanReadableMoney(result.maxMoney)}`
-        );
+    for (const result of results.filter((res) => !res.rootAccess)) {
+        ns.print(`[${result.server}] ${humanReadableMoney(result.maxMoney)}`);
     }
 
     ns.print("--- With root access ---");
-    for (const result of results.filter(res => res.rootAccess)) {
-        ns.print(
-            `[${result.server}] ${humanReadableMoney(result.maxMoney)}`
-        );
+    for (const result of results.filter((res) => res.rootAccess)) {
+        ns.print(`[${result.server}] ${humanReadableMoney(result.maxMoney)}`);
     }
 }

@@ -71,6 +71,12 @@ export const SERVERS = SERVERS_PORT_0.concat(SERVERS_PORT_1)
     .concat(SERVERS_PORT_4)
     .concat(SERVERS_PORT_5);
 
+/*
+ * 16TB: ~$901.120M
+ */
+export const PREFIX = "serv-";
+export const RAM = 1024 * 16; // 16TB  ~$896M
+
 export const RAM_REQUIREMENTS = 2.4;
-export const TARGET = "the-hub";
+export const TARGET = "omega-net";
 export const ATTACK_THRESH = 0.75;

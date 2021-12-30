@@ -1,4 +1,10 @@
-import { ATTACK_THRESH, TARGET, RAM_REQUIREMENTS } from "/scripts/constants.js";
+import {
+    ATTACK_THRESH,
+    TARGET,
+    RAM_REQUIREMENTS,
+    PREFIX,
+    RAM,
+} from "/scripts/constants.js";
 import { humanReadableMoney } from "/scripts/utils.js";
 
 /* Rough prices
@@ -11,31 +17,28 @@ import { humanReadableMoney } from "/scripts/utils.js";
 
 /** @param {NS} ns **/
 export async function main(ns) {
-    const prefix = "serv-";
-    const ram = 1024; // ~$56m
-
     // Base server idx
     let i = 0;
     // Skip servers that already exist
-    while (ns.serverExists(`${prefix}${i}`)) {
-        ns.print(`${prefix}${i} already exists, skipping...`);
+    while (ns.serverExists(`${PREFIX}${i}`)) {
+        ns.print(`${PREFIX}${i} already exists, skipping...`);
         i++;
     }
     // Store cost of the server
-    const serverCost = ns.getPurchasedServerCost(ram);
-    ns.print(`${ram}GB server cost: ${humanReadableMoney(serverCost)}`);
+    const serverCost = ns.getPurchasedServerCost(RAM);
+    ns.print(`${RAM}GB server cost: ${humanReadableMoney(serverCost)}`);
 
     while (i < ns.getPurchasedServerLimit()) {
         if (ns.getServerMoneyAvailable("home") < serverCost) {
             ns.print("Can't afford new server, sleeping for 60 seconds...");
             await ns.sleep(60 * 1000);
         } else {
-            const hostname = `${prefix}${i}`;
+            const hostname = `${PREFIX}${i}`;
             ns.print(`Purchasing server: ${hostname}`);
-            ns.purchaseServer(hostname, ram);
+            ns.purchaseServer(hostname, RAM);
             await ns.scp(["/scripts/attack.js", "/scripts/utils.js"], hostname);
 
-            const threads = Math.floor(ram / RAM_REQUIREMENTS);
+            const threads = Math.floor(RAM / RAM_REQUIREMENTS);
             ns.exec(
                 "/scripts/attack.js",
                 hostname,

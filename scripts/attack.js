@@ -2,7 +2,7 @@ import { humanReadableMoney } from "/scripts/utils.js";
 
 /** @param {NS} ns **/
 export async function main(ns) {
-    ns.disableLog("ALL");
+    // ns.disableLog("ALL");
 
     const target = ns.args[0];
     let moneyMult = 0.75;
@@ -13,7 +13,7 @@ export async function main(ns) {
     const moneyThresh = ns.getServerMaxMoney(target) * moneyMult;
     ns.print(`Money threshold set to ${humanReadableMoney(moneyThresh)}`);
 
-    const securityThresh = ns.getServerMinSecurityLevel(target) + 5;
+    const securityThresh = ns.getServerMinSecurityLevel(target) + 15;
     ns.print(`Security threshold set to ${securityThresh}`);
 
     while (true) {
