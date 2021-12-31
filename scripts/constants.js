@@ -72,28 +72,30 @@ export const SERVERS = SERVERS_PORT_0.concat(SERVERS_PORT_1)
     .concat(SERVERS_PORT_5);
 
 /**
- * 1TB: ~$56M
- * 2TB: ~$112M
- * 4TB: ~$225M
- * 8TB: ~$450M
- * 16TB: $901.120M
+ ** 1TB:  ~$56M
+ ** 2TB:  ~$112M
+ ** 4TB:  ~$225M
+ ** 8TB:  ~$450M
+ ** 16TB:  $901.120M
+ ** 32TB:  $1.8B
+ ** 64TB:  $3.6B
  **/
 export const PREFIX = "serv-";
-export const RAM = 1024 * 16;
+export const RAM = 1024 * 64;
 
 export const RAM_REQUIREMENTS = 2.4;
-const TARGETS_0 = ["joesguns"];
-const TARGETS_1 = ["iron-gym"];
-const TARGETS_2 = ["omega-net"];
-const TARGETS_3 = ["iron-gym", "omega-net"];
-const TARGETS_4 = ["silver-helix", "omega-net", "johnson-ortho"];
-const TARGETS_5 = [
+export const TARGETS_0 = ["joesguns"];
+export const TARGETS_1 = ["iron-gym"];
+export const TARGETS_2 = ["omega-net"];
+export const TARGETS_3 = ["iron-gym", "omega-net"];
+export const TARGETS_4 = ["silver-helix", "omega-net", "johnson-ortho"];
+export const TARGETS_5 = [
     "silver-helix",
     "omega-net",
     "johnson-ortho",
     "the-hub",
     "rothman-uni",
 ];
-export const TARGETS = TARGETS_4;
+export const TARGETS = TARGETS_5;
 
 export const ATTACK_THRESH = 0.75;
