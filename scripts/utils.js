@@ -1,3 +1,5 @@
+import { ATTACK_THRESH, RAM_REQUIREMENTS } from "/scripts/constants.js";
+
 /** @param {number} value
  **/
 export function humanReadable(value) {
@@ -26,4 +28,42 @@ export function humanReadableRAM(value) {
     }
 
     return `${value.toFixed(0)}${postfixes[idx]}`;
+}
+
+/** @param {NS} ns
+ * @param {string} server
+ * @param {Array<string>} targets
+ * @params {number} ram
+ */
+export function executeAttack(ns, server, targets, ram) {
+    const threads = Math.floor(ram / RAM_REQUIREMENTS);
+    if (threads > 100) {
+        threads -= 10;
+    } else if (threads < 1) {
+        // Exit early if no threads available
+        return;
+    }
+    ns.killall(server);
+
+    if (threads < targets.length * 10) {
+        ns.exec(
+            "/scripts/attack.js",
+            server,
+            threads,
+            targets[0],
+            "--moneyThresh",
+            ATTACK_THRESH
+        );
+    } else {
+        for (const target of targets) {
+            ns.exec(
+                "/scripts/attack.js",
+                server,
+                Math.floor(threads / targets.length),
+                target,
+                "--moneyThresh",
+                ATTACK_THRESH
+            );
+        }
+    }
 }

@@ -1,14 +1,8 @@
-import {
-    ATTACK_THRESH,
-    SERVERS,
-    TARGET,
-    RAM_REQUIREMENTS,
-} from "/scripts/constants.js";
+import { SERVERS, TARGETS } from "/scripts/constants.js";
+import { executeAttack } from "/scripts/utils.js";
 
 /** @param {NS} ns **/
 export async function main(ns) {
-    ns.disableLog("sleep");
-
     ns.print("Copying attack script to servers");
     for (const server of SERVERS) {
         ns.print(`[${server}] Checking server...`);
@@ -21,24 +15,7 @@ export async function main(ns) {
         await ns.scp(["/scripts/utils.js", "/scripts/attack.js"], server);
 
         const availMem = ns.getServerMaxRam(server);
-        let threads = Math.floor(availMem / RAM_REQUIREMENTS);
-
-        if (threads > 100) {
-            threads -= 10;
-        } else if (threads < 1) {
-            continue;
-        }
-
-        ns.killall(server);
-        ns.exec(
-            "/scripts/attack.js",
-            server,
-            threads,
-            TARGET,
-            "--moneyThresh",
-            ATTACK_THRESH
-        );
-
+        executeAttack(ns, server, TARGETS, availMem);
         ns.print("-------------------");
     }
 
@@ -49,24 +26,7 @@ export async function main(ns) {
         await ns.scp(["/scripts/utils.js", "/scripts/attack.js"], server);
 
         const availMem = ns.getServerMaxRam(server);
-        let threads = Math.floor(availMem / RAM_REQUIREMENTS);
-
-        if (threads > 100) {
-            threads -= 10;
-        } else if (threads < 1) {
-            continue;
-        }
-
-        ns.killall(server);
-        ns.exec(
-            "/scripts/attack.js",
-            server,
-            threads,
-            TARGET,
-            "--moneyThresh",
-            ATTACK_THRESH
-        );
-
+        executeAttack(ns, server, TARGETS, availMem);
         ns.print("-------------------");
 
         i++;

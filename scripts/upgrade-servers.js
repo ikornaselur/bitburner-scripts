@@ -1,11 +1,9 @@
+import { TARGETS, RAM, PREFIX } from "/scripts/constants.js";
 import {
-    ATTACK_THRESH,
-    TARGET,
-    RAM_REQUIREMENTS,
-    RAM,
-    PREFIX,
-} from "/scripts/constants.js";
-import { humanReadableMoney, humanReadableRAM } from "/scripts/utils.js";
+    humanReadableMoney,
+    humanReadableRAM,
+    executeAttack,
+} from "/scripts/utils.js";
 
 /** @param {NS} ns **/
 function getLowestSpec(ns) {
@@ -69,15 +67,7 @@ export async function main(ns) {
         ns.purchaseServer(hostname, RAM);
         await ns.scp(["/scripts/attack.js", "/scripts/utils.js"], hostname);
 
-        const threads = Math.floor(RAM / RAM_REQUIREMENTS);
-        ns.exec(
-            "/scripts/attack.js",
-            hostname,
-            threads,
-            TARGET,
-            "--moneyThresh",
-            ATTACK_THRESH
-        );
+        executeAttack(ns, hostname, TARGETS, RAM);
         success = true;
     }
 }

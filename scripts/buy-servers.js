@@ -1,11 +1,11 @@
 import {
     ATTACK_THRESH,
-    TARGET,
+    TARGETS,
     RAM_REQUIREMENTS,
     PREFIX,
     RAM,
 } from "/scripts/constants.js";
-import { humanReadableMoney } from "/scripts/utils.js";
+import { humanReadableMoney, executeAttack } from "/scripts/utils.js";
 
 /* Rough prices
  * 512GB ~$28m
@@ -38,15 +38,7 @@ export async function main(ns) {
             ns.purchaseServer(hostname, RAM);
             await ns.scp(["/scripts/attack.js", "/scripts/utils.js"], hostname);
 
-            const threads = Math.floor(RAM / RAM_REQUIREMENTS);
-            ns.exec(
-                "/scripts/attack.js",
-                hostname,
-                threads,
-                TARGET,
-                "--moneyThresh",
-                ATTACK_THRESH
-            );
+            executeAttack(ns, hostname, TARGETS, RAM);
 
             i++;
         }

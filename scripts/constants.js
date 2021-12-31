@@ -13,7 +13,6 @@ export const SERVERS_PORT_1 = [
     "iron-gym",
     "max-hardware",
     "neo-net",
-    "silver-helix",
     "zer0",
 ];
 
@@ -23,6 +22,7 @@ export const SERVERS_PORT_2 = [
     "johnson-ortho",
     "omega-net",
     "phantasy",
+    "silver-helix",
     "the-hub",
 ];
 
@@ -71,12 +71,28 @@ export const SERVERS = SERVERS_PORT_0.concat(SERVERS_PORT_1)
     .concat(SERVERS_PORT_4)
     .concat(SERVERS_PORT_5);
 
-/*
- * 16TB: ~$901.120M
- */
+/**
+ * 1TB: ~$56M
+ * 2TB: ~$112M
+ * 4TB: ~$225M
+ * 8TB: ~$450M
+ * 16TB: $901.120M
+ **/
 export const PREFIX = "serv-";
-export const RAM = 1024 * 16; // 16TB  ~$896M
+export const RAM = 1024 * 2; // 2TB
 
 export const RAM_REQUIREMENTS = 2.4;
-export const TARGET = "omega-net";
+const TARGETS_0 = ["joesguns"];
+const TARGETS_1 = ["iron-gym"];
+const TARGETS_2 = ["omega-net"];
+const TARGETS_3 = ["iron-gym", "omega-net"];
+const TARGETS_5 = [
+    "silver-helix",
+    "omega-net",
+    "johnson-ortho",
+    "the-hub",
+    "rothman-uni",
+];
+export const TARGETS = TARGETS_3;
+
 export const ATTACK_THRESH = 0.75;
