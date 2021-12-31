@@ -19,20 +19,20 @@ export async function main(ns) {
     let i = 0;
     // Skip servers that already exist
     while (ns.serverExists(`${PREFIX}${i}`)) {
-        ns.print(`${PREFIX}${i} already exists, skipping...`);
+        ns.tprint(`${PREFIX}${i} already exists, skipping...`);
         i++;
     }
     // Store cost of the server
     const serverCost = ns.getPurchasedServerCost(RAM);
-    ns.print(`${RAM}GB server cost: ${humanReadableMoney(serverCost)}`);
+    ns.tprint(`${RAM}GB server cost: ${humanReadableMoney(serverCost)}`);
 
     while (i < ns.getPurchasedServerLimit()) {
         if (ns.getServerMoneyAvailable("home") < serverCost) {
-            ns.print("Can't afford new server, sleeping for 60 seconds...");
+            ns.tprint("Can't afford new server, sleeping for 60 seconds...");
             await ns.sleep(60 * 1000);
         } else {
             const hostname = `${PREFIX}${i}`;
-            ns.print(`Purchasing server: ${hostname}`);
+            ns.tprint(`Purchasing server: ${hostname}`);
             ns.purchaseServer(hostname, RAM);
             await scpAttackScripts(ns, hostname);
 

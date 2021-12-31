@@ -3,20 +3,21 @@ import { executeAttack, scpAttackScripts } from "/scripts/utils.js";
 
 /** @param {NS} ns **/
 export async function main(ns) {
-    ns.print("Copying attack script to servers");
+    ns.tprint("Copying attack script to servers");
     for (const server of SERVERS) {
-        ns.print(`[${server}] Checking server...`);
+        ns.tprint(`[${server}] Checking server...`);
         if (!ns.hasRootAccess(server)) {
             // Skip the servers without root access
-            ns.print(`[${server}] No root access!`);
+            ns.tprint(`[${server}] No root access!`);
             continue;
         }
-        ns.print(`[${server}] Copying script`);
+        ns.tprint(`[${server}] Copying script`);
         await scpAttackScripts(ns, server);
 
         const availMem = ns.getServerMaxRam(server);
         executeAttack(ns, server, TARGETS, availMem);
-        ns.print("-------------------");
+        ns.tprint("-------------------");
+        await ns.sleep(200);
     }
 
     // Copy to the serv-X servers
@@ -27,10 +28,11 @@ export async function main(ns) {
 
         const availMem = ns.getServerMaxRam(server);
         executeAttack(ns, server, TARGETS, availMem);
-        ns.print("-------------------");
+        ns.tprint("-------------------");
 
         i++;
         server = `serv-${i}`;
+        await ns.sleep(200);
     }
 
     // Execute attack on home as well

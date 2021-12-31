@@ -5,7 +5,6 @@ import { humanReadableMoney } from "/scripts/utils.js";
 export async function main(ns) {
     ns.disableLog("getServerMaxMoney");
 
-    ns.print("Copying attack script to servers");
     const userHackingLevel = ns.getHackingLevel();
     const results = [];
     for (const server of SERVERS) {
@@ -23,13 +22,13 @@ export async function main(ns) {
     }
     results.sort((a, b) => a.maxMoney - b.maxMoney);
 
-    ns.print("--- Not hackable ---");
+    ns.tprint("--- Not hackable ---");
     for (const result of results.filter((res) => !res.hackable)) {
-        ns.print(`[${result.server}] ${humanReadableMoney(result.maxMoney)}`);
+        ns.tprint(`[${result.server}] ${humanReadableMoney(result.maxMoney)}`);
     }
 
-    ns.print("--- Hackable ---");
+    ns.tprint("--- Hackable ---");
     for (const result of results.filter((res) => res.hackable)) {
-        ns.print(`[${result.server}] ${humanReadableMoney(result.maxMoney)}`);
+        ns.tprint(`[${result.server}] ${humanReadableMoney(result.maxMoney)}`);
     }
 }

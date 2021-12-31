@@ -14,7 +14,9 @@ export async function main(ns) {
     let keys = Object.keys(results);
     keys.sort((a, b) => a - b);
     for (const key of keys) {
-        ns.print(`--- ${humanReadableRAM(key)} ---`);
-        ns.print(results[key]);
+        ns.tprint(`--- ${humanReadableRAM(key)} ---`);
+        for (const val of results[key]) {
+            ns.tprint(val);
+        }
     }
 }

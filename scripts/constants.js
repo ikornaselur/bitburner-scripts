@@ -48,6 +48,7 @@ export const SERVERS_PORT_4 = [
     "snap-fitness",
     "aevum-police",
     "global-pharm",
+    "applied-energetics",
 ];
 
 export const SERVERS_PORT_5 = [
@@ -63,6 +64,10 @@ export const SERVERS_PORT_5 = [
     "taiyang-digital",
     "zb-institute",
     "zeus-med",
+    "microdyne",
+    "fulcrumtech",
+    "titan-labs",
+    "helios",
 ];
 
 export const SERVERS = SERVERS_PORT_0.concat(SERVERS_PORT_1)
@@ -105,12 +110,6 @@ export const TARGETS_6 = [
 ];
 export const TARGETS_TEST = [
     "joesguns",
-    "nectar-net",
-    "hong-fang-tea",
-    "harakiri-sushi",
-    "neo-net",
-    "zer0",
-    "max-hardware",
     "iron-gym",
     "phantasy",
     "crush-fitness",
@@ -120,6 +119,12 @@ export const TARGETS_TEST = [
     "the-hub",
     "comptek",
     "rothman-uni",
+    "millenium-fitness",
+    "summit-uni",
+    "netlink",
+    "aevum-police",
+    "catalyst",
+    "rho-construction",
 ];
 export const TARGETS = TARGETS_TEST;
 

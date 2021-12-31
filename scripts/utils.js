@@ -49,12 +49,13 @@ export async function scpAttackScripts(ns, server) {
  **/
 export function executeAttack(ns, server, targets, ram, killall) {
     const attackRamReq = ns.getScriptRam("/scripts/attack.js");
-    ns.print(`Attack RAM requirements: ${humanReadableRAM(attackRamReq)}`);
+    ns.tprint(`Attack RAM requirements: ${humanReadableRAM(attackRamReq)}`);
     let threads = Math.floor(ram / attackRamReq);
     if (threads > 100) {
         threads -= 10;
     } else if (threads < 1) {
         // Exit early if no threads available
+        ns.tprint("Not enough threads to initiate attack, aborting");
         return;
     }
     if (killall === undefined || killall) {
@@ -62,6 +63,7 @@ export function executeAttack(ns, server, targets, ram, killall) {
     }
 
     if (threads < targets.length * 10) {
+        ns.tprint(`[${server}] Executing attack on just "${targets[0]}" because of lack of threads`);
         ns.exec(
             "/scripts/attack.js",
             server,
@@ -71,6 +73,7 @@ export function executeAttack(ns, server, targets, ram, killall) {
             ATTACK_THRESH
         );
     } else {
+        ns.tprint(`[${server}] Executing attack on "${targets}"`)
         for (const target of targets) {
             ns.exec(
                 "/scripts/attack.js",
