@@ -96,6 +96,14 @@ export const TARGETS_5 = [
     "the-hub",
     "rothman-uni",
 ];
-export const TARGETS = TARGETS_5;
+export const TARGETS_6 = [
+    "the-hub",
+    "comptek",
+    "rothman-uni",
+    "netlink",
+    "aevum-police",
+    "catalyst",
+];
+export const TARGETS = TARGETS_6;
 
 export const ATTACK_THRESH = 0.75;
