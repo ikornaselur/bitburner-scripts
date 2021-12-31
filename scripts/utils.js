@@ -22,8 +22,8 @@ export function humanReadableRAM(value) {
     const postfixes = ["GB", "TB", "PB", "EB"];
     let idx = 0;
 
-    while (value > 1000) {
-        value = value / 1000;
+    while (value > 1024) {
+        value = value / 1024;
         idx += 1;
     }
 
