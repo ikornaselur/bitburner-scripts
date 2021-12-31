@@ -45,8 +45,9 @@ export async function scpAttackScripts(ns, server) {
  ** @param {string} server
  ** @param {Array<string>} targets
  ** @params {number} ram
+ ** @params {boolean} killall
  **/
-export function executeAttack(ns, server, targets, ram) {
+export function executeAttack(ns, server, targets, ram, killall) {
     let threads = Math.floor(ram / RAM_REQUIREMENTS);
     if (threads > 100) {
         threads -= 10;
@@ -54,7 +55,9 @@ export function executeAttack(ns, server, targets, ram) {
         // Exit early if no threads available
         return;
     }
-    ns.killall(server);
+    if (killall === undefined || killall) {
+        ns.killall(server);
+    }
 
     if (threads < targets.length * 10) {
         ns.exec(

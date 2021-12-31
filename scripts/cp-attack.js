@@ -32,4 +32,9 @@ export async function main(ns) {
         i++;
         server = `serv-${i}`;
     }
+
+    // Execute attack on home as well
+    const homeMem = ns.getServerMaxRam("home");
+    ns.kill('attack.js', "home");
+    executeAttack(ns, "home", TARGETS, homeMem, false);
 }
