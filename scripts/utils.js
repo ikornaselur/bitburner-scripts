@@ -1,4 +1,4 @@
-import { ATTACK_THRESH, RAM_REQUIREMENTS } from "/scripts/constants.js";
+import { ATTACK_THRESH } from "/scripts/constants.js";
 
 /** @param {number} value
  **/
@@ -27,7 +27,7 @@ export function humanReadableRAM(value) {
         idx += 1;
     }
 
-    return `${value.toFixed(0)}${postfixes[idx]}`;
+    return `${value.toFixed(1)}${postfixes[idx]}`;
 }
 
 /**
@@ -48,7 +48,9 @@ export async function scpAttackScripts(ns, server) {
  ** @params {boolean} killall
  **/
 export function executeAttack(ns, server, targets, ram, killall) {
-    let threads = Math.floor(ram / RAM_REQUIREMENTS);
+    const attackRamReq = ns.getScriptRam("/scripts/attack.js");
+    ns.print(`Attack RAM requirements: ${humanReadableRAM(attackRamReq)}`);
+    let threads = Math.floor(ram / attackRamReq);
     if (threads > 100) {
         threads -= 10;
     } else if (threads < 1) {

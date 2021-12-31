@@ -83,7 +83,6 @@ export const SERVERS = SERVERS_PORT_0.concat(SERVERS_PORT_1)
 export const PREFIX = "serv-";
 export const RAM = 1024 * 64;
 
-export const RAM_REQUIREMENTS = 2.4;
 export const TARGETS_0 = ["joesguns"];
 export const TARGETS_1 = ["iron-gym"];
 export const TARGETS_2 = ["omega-net"];
@@ -104,6 +103,24 @@ export const TARGETS_6 = [
     "aevum-police",
     "catalyst",
 ];
-export const TARGETS = TARGETS_6;
+export const TARGETS_TEST = [
+    "joesguns",
+    "nectar-net",
+    "hong-fang-tea",
+    "harakiri-sushi",
+    "neo-net",
+    "zer0",
+    "max-hardware",
+    "iron-gym",
+    "phantasy",
+    "crush-fitness",
+    "silver-helix",
+    "omega-net",
+    "johnson-ortho",
+    "the-hub",
+    "comptek",
+    "rothman-uni",
+];
+export const TARGETS = TARGETS_TEST;
 
 export const ATTACK_THRESH = 0.75;
