@@ -35,6 +35,10 @@ export async function main(ns) {
 
     // Execute attack on home as well
     const homeMem = ns.getServerMaxRam("home");
-    ns.kill('attack.js', "home");
+    for (const process of ns.ps("home")) {
+        if (process.filename.indexOf("/scripts/attack.js") > -1) {
+            ns.kill(process.pid, "home");
+        }
+    }
     executeAttack(ns, "home", TARGETS, homeMem, false);
 }

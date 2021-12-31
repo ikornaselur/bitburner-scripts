@@ -79,13 +79,14 @@ export const SERVERS = SERVERS_PORT_0.concat(SERVERS_PORT_1)
  * 16TB: $901.120M
  **/
 export const PREFIX = "serv-";
-export const RAM = 1024 * 2; // 2TB
+export const RAM = 1024 * 16;
 
 export const RAM_REQUIREMENTS = 2.4;
 const TARGETS_0 = ["joesguns"];
 const TARGETS_1 = ["iron-gym"];
 const TARGETS_2 = ["omega-net"];
 const TARGETS_3 = ["iron-gym", "omega-net"];
+const TARGETS_4 = ["silver-helix", "omega-net", "johnson-ortho"];
 const TARGETS_5 = [
     "silver-helix",
     "omega-net",
@@ -93,6 +94,6 @@ const TARGETS_5 = [
     "the-hub",
     "rothman-uni",
 ];
-export const TARGETS = TARGETS_3;
+export const TARGETS = TARGETS_4;
 
 export const ATTACK_THRESH = 0.75;
