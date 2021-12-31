@@ -1,11 +1,9 @@
+import { TARGETS, PREFIX, RAM } from "/scripts/constants.js";
 import {
-    ATTACK_THRESH,
-    TARGETS,
-    RAM_REQUIREMENTS,
-    PREFIX,
-    RAM,
-} from "/scripts/constants.js";
-import { humanReadableMoney, executeAttack } from "/scripts/utils.js";
+    humanReadableMoney,
+    executeAttack,
+    scpAttackScripts,
+} from "/scripts/utils.js";
 
 /* Rough prices
  * 512GB ~$28m
@@ -36,7 +34,7 @@ export async function main(ns) {
             const hostname = `${PREFIX}${i}`;
             ns.print(`Purchasing server: ${hostname}`);
             ns.purchaseServer(hostname, RAM);
-            await ns.scp(["/scripts/attack.js", "/scripts/utils.js"], hostname);
+            await scpAttackScripts(ns, hostname);
 
             executeAttack(ns, hostname, TARGETS, RAM);
 

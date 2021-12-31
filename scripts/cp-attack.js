@@ -1,5 +1,5 @@
 import { SERVERS, TARGETS } from "/scripts/constants.js";
-import { executeAttack } from "/scripts/utils.js";
+import { executeAttack, scpAttackScripts } from "/scripts/utils.js";
 
 /** @param {NS} ns **/
 export async function main(ns) {
@@ -12,7 +12,7 @@ export async function main(ns) {
             continue;
         }
         ns.print(`[${server}] Copying script`);
-        await ns.scp(["/scripts/utils.js", "/scripts/attack.js"], server);
+        await scpAttackScripts(ns, server);
 
         const availMem = ns.getServerMaxRam(server);
         executeAttack(ns, server, TARGETS, availMem);
@@ -23,7 +23,7 @@ export async function main(ns) {
     let i = 0;
     let server = `serv-${i}`;
     while (ns.serverExists(server)) {
-        await ns.scp(["/scripts/utils.js", "/scripts/attack.js"], server);
+        await scpAttackScripts(ns, server);
 
         const availMem = ns.getServerMaxRam(server);
         executeAttack(ns, server, TARGETS, availMem);

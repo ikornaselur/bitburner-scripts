@@ -3,6 +3,7 @@ import {
     humanReadableMoney,
     humanReadableRAM,
     executeAttack,
+    scpAttackScripts,
 } from "/scripts/utils.js";
 
 /** @param {NS} ns **/
@@ -65,7 +66,7 @@ export async function main(ns) {
 
         ns.print(`Purchasing server: ${hostname}`);
         ns.purchaseServer(hostname, RAM);
-        await ns.scp(["/scripts/attack.js", "/scripts/utils.js"], hostname);
+        await scpAttackScripts(ns, hostname);
 
         executeAttack(ns, hostname, TARGETS, RAM);
         success = true;

@@ -30,13 +30,24 @@ export function humanReadableRAM(value) {
     return `${value.toFixed(0)}${postfixes[idx]}`;
 }
 
+/**
+ ** @param {NS} ns
+ ** @param {string} server
+ **/
+export async function scpAttackScripts(ns, server) {
+    await ns.scp(
+        ["/scripts/utils.js", "/scripts/constants.js", "/scripts/attack.js"],
+        server
+    );
+}
+
 /** @param {NS} ns
- * @param {string} server
- * @param {Array<string>} targets
- * @params {number} ram
- */
+ ** @param {string} server
+ ** @param {Array<string>} targets
+ ** @params {number} ram
+ **/
 export function executeAttack(ns, server, targets, ram) {
-    const threads = Math.floor(ram / RAM_REQUIREMENTS);
+    let threads = Math.floor(ram / RAM_REQUIREMENTS);
     if (threads > 100) {
         threads -= 10;
     } else if (threads < 1) {
