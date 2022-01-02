@@ -1,95 +1,83 @@
-export const SERVERS_PORT_0 = [
-    "foodnstuff",
-    "harakiri-sushi",
-    "hong-fang-tea",
-    "joesguns",
-    "n00dles",
-    "nectar-net",
-    "sigma-cosmetics",
-];
+export const SERVERS_MAP = {
+    0: [
+        "n00dles",
+        "foodnstuff",
+        "sigma-cosmetics",
+        "joesguns",
+        "hong-fang-tea",
+        "harakiri-sushi",
+        "nectar-net",
+    ],
+    1: ["iron-gym", "zer0", "CSEC", "max-hardware", "neo-net"],
+    2: [
+        "phantasy",
+        "omega-net",
+        "silver-helix",
+        "crush-fitness",
+        "avmnite-02h",
+        "the-hub",
+        "johnson-ortho",
+    ],
+    3: [
+        "comptek",
+        "netlink",
+        "rothman-uni",
+        "summit-uni",
+        "catalyst",
+        "I.I.I.I",
+        "millenium-fitness",
+        "rho-construction",
+    ],
+    4: [
+        "syscore",
+        "lexo-corp",
+        "aevum-police",
+        "alpha-ent",
+        "global-pharm",
+        "snap-fitness",
+        "unitalife",
+        "univ-energy",
+        "zb-def",
+        "nova-med",
+        "applied-energetics",
+        "run4theh111z",
+        ".",
+    ],
+    5: [
+        "darkweb",
+        "zb-institute",
+        "aerocorp",
+        "galactic-cyber",
+        "deltaone",
+        "omnia",
+        "icarus",
+        "solaris",
+        "defcomm",
+        "zeus-med",
+        "infocomm",
+        "taiyang-digital",
+        "microdyne",
+        "titan-labs",
+        "fulcrumtech",
+        "vitalife",
+        "stormtech",
+        "helios",
+        "kuai-gong",
+        "omnitek",
+        "4sigma",
+        "b-and-a",
+        "blade",
+        "clarkinc",
+        "nwo",
+        "powerhouse-fitness",
+        "megacorp",
+        "ecorp",
+        "The-Cave",
+        "fulcrumassets",
+    ],
+};
 
-export const SERVERS_PORT_1 = [
-    "CSEC",
-    "iron-gym",
-    "max-hardware",
-    "neo-net",
-    "zer0",
-];
-
-export const SERVERS_PORT_2 = [
-    "avmnite-02h",
-    "crush-fitness",
-    "johnson-ortho",
-    "omega-net",
-    "phantasy",
-    "silver-helix",
-    "the-hub",
-];
-
-export const SERVERS_PORT_3 = [
-    "I.I.I.I",
-    "catalyst",
-    "comptek",
-    "millenium-fitness",
-    "netlink",
-    "rho-construction",
-    "rothman-uni",
-    "summit-uni",
-];
-
-export const SERVERS_PORT_4 = [
-    "syscore",
-    "lexo-corp",
-    "unitalife",
-    "nova-med",
-    "univ-energy",
-    "alpha-ent",
-    "zb-def",
-    "snap-fitness",
-    "aevum-police",
-    "global-pharm",
-    "applied-energetics",
-    "run4theh111z",
-    "."
-];
-
-export const SERVERS_PORT_5 = [
-    "aerocorp",
-    "darkweb",
-    "defcomm",
-    "deltaone",
-    "galactic-cyber",
-    "icarus",
-    "infocomm",
-    "omnia",
-    "solaris",
-    "taiyang-digital",
-    "zb-institute",
-    "zeus-med",
-    "microdyne",
-    "fulcrumtech",
-    "titan-labs",
-    "helios",
-    "omnitek",
-    "4sigma",
-    "stormtech",
-    "kuai-gong",
-    "blade",
-    "megacorp",
-    "clarkinc",
-    "vitalife",
-    "fulcrumassets",
-    "powerhouse-fitness",
-    "The-Cave",
-    "ecorp",
-    "nwo",
-];
-
-export const SERVERS = SERVERS_PORT_0.concat(SERVERS_PORT_1)
-    .concat(SERVERS_PORT_2)
-    .concat(SERVERS_PORT_3)
-    .concat(SERVERS_PORT_4)
-    .concat(SERVERS_PORT_5);
+export const SERVERS = Object.values(SERVERS_MAP).flat();
 
 /**
  ** 1TB:  ~$56M
@@ -103,7 +91,7 @@ export const SERVERS = SERVERS_PORT_0.concat(SERVERS_PORT_1)
  ** 256TB: $14.4B
  **/
 export const PREFIX = "serv-";
-export const RAM = 1024 * 64;
+export const RAM = 1024 * 256;
 
 export const TARGETS_0 = ["joesguns"];
 export const TARGETS_1 = ["iron-gym"];

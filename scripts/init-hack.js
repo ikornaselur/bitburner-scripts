@@ -1,15 +1,8 @@
-import {
-    SERVERS_PORT_0,
-    SERVERS_PORT_1,
-    SERVERS_PORT_2,
-    SERVERS_PORT_3,
-    SERVERS_PORT_4,
-    SERVERS_PORT_5,
-} from "/scripts/constants.js";
+import { SERVERS_MAP } from "/scripts/constants.js";
 
 /** @param {NS} ns **/
 export async function main(ns) {
-    for (const server of SERVERS_PORT_0) {
+    for (const server of SERVERS_MAP[0]) {
         if (!ns.hasRootAccess(server)) {
             ns.tprint(`Getting root access on ${server}`);
             ns.nuke(server);
@@ -20,7 +13,7 @@ export async function main(ns) {
         return;
     }
 
-    for (const server of SERVERS_PORT_1) {
+    for (const server of SERVERS_MAP[1]) {
         if (!ns.hasRootAccess(server)) {
             ns.tprint(`Getting root access on ${server}`);
             ns.brutessh(server);
@@ -32,7 +25,7 @@ export async function main(ns) {
         return;
     }
 
-    for (const server of SERVERS_PORT_2) {
+    for (const server of SERVERS_MAP[2]) {
         if (!ns.hasRootAccess(server)) {
             ns.tprint(`Getting root access on ${server}`);
             ns.ftpcrack(server);
@@ -45,7 +38,7 @@ export async function main(ns) {
         return;
     }
 
-    for (const server of SERVERS_PORT_3) {
+    for (const server of SERVERS_MAP[3]) {
         if (!ns.hasRootAccess(server)) {
             ns.tprint(`Getting root access on ${server}`);
             ns.httpworm(server);
@@ -59,7 +52,7 @@ export async function main(ns) {
         return;
     }
 
-    for (const server of SERVERS_PORT_4) {
+    for (const server of SERVERS_MAP[4]) {
         if (!ns.hasRootAccess(server)) {
             ns.tprint(`Getting root access on ${server}`);
             ns.sqlinject(server);
@@ -74,7 +67,7 @@ export async function main(ns) {
         return;
     }
 
-    for (const server of SERVERS_PORT_5) {
+    for (const server of SERVERS_MAP[5]) {
         if (!ns.hasRootAccess(server)) {
             ns.tprint(`Getting root access on ${server}`);
             ns.relaysmtp(server);

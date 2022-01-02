@@ -65,5 +65,6 @@ export async function main(ns) {
         await scpAttackScripts(ns, hostname);
 
         executeAttack(ns, hostname, TARGETS, RAM);
+        await ns.sleep(200);
     }
 }

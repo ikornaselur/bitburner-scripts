@@ -21,7 +21,7 @@ async function find(ns, current, target, path, visited) {
         for (const connected of connectedServers) {
             visited.push(connected);
             await find(ns, connected, target, path.concat(current), visited);
-            await ns.sleep(50);
+            await ns.sleep(10);
         }
     }
 }
@@ -29,5 +29,9 @@ async function find(ns, current, target, path, visited) {
 /** @param {NS} ns **/
 export async function main(ns) {
     const target = ns.args[0];
+    if (!ns.serverExists(target)) {
+        ns.tprint(`"${target}" doesn't exist. Aborting...`);
+        ns.exit();
+    }
     await find(ns, "home", target, [], ["home"]);
 }
