@@ -63,7 +63,9 @@ export function executeAttack(ns, server, targets, ram, killall) {
     }
 
     if (threads < targets.length * 10) {
-        ns.tprint(`[${server}] Executing attack on just "${targets[0]}" because of lack of threads`);
+        ns.tprint(
+            `[${server}] Executing attack on just "${targets[0]}" because of lack of threads`
+        );
         ns.exec(
             "/scripts/attack.js",
             server,
@@ -73,7 +75,7 @@ export function executeAttack(ns, server, targets, ram, killall) {
             ATTACK_THRESH
         );
     } else {
-        ns.tprint(`[${server}] Executing attack on "${targets}"`)
+        ns.tprint(`[${server}] Executing attack on "${targets}"`);
         for (const target of targets) {
             ns.exec(
                 "/scripts/attack.js",
@@ -85,4 +87,18 @@ export function executeAttack(ns, server, targets, ram, killall) {
             );
         }
     }
+}
+
+/** @param {NS} ns
+ ** @param {string} server
+ ** @param {string} target
+ **/
+export function executeFocus(ns, server, target) {
+    const serverRam = ns.getServerMaxRam(server);
+    const ramReq = ns.getScriptRam("/scripts/focus-attack.js");
+    const threads = Math.floor(serverRam / ramReq);
+
+    ns.killall(server);
+
+    ns.exec("/scripts/focus-attack.js", server, threads, target);
 }

@@ -49,6 +49,8 @@ export const SERVERS_PORT_4 = [
     "aevum-police",
     "global-pharm",
     "applied-energetics",
+    "run4theh111z",
+    "."
 ];
 
 export const SERVERS_PORT_5 = [
@@ -68,6 +70,19 @@ export const SERVERS_PORT_5 = [
     "fulcrumtech",
     "titan-labs",
     "helios",
+    "omnitek",
+    "4sigma",
+    "stormtech",
+    "kuai-gong",
+    "blade",
+    "megacorp",
+    "clarkinc",
+    "vitalife",
+    "fulcrumassets",
+    "powerhouse-fitness",
+    "The-Cave",
+    "ecorp",
+    "nwo",
 ];
 
 export const SERVERS = SERVERS_PORT_0.concat(SERVERS_PORT_1)
@@ -84,6 +99,8 @@ export const SERVERS = SERVERS_PORT_0.concat(SERVERS_PORT_1)
  ** 16TB:  $901.120M
  ** 32TB:  $1.8B
  ** 64TB:  $3.6B
+ ** 128TB: $7.2B
+ ** 256TB: $14.4B
  **/
 export const PREFIX = "serv-";
 export const RAM = 1024 * 64;
@@ -124,8 +141,9 @@ export const TARGETS_TEST = [
     "netlink",
     "aevum-police",
     "catalyst",
+    "syscore",
+    "alpha-ent",
     "rho-construction",
 ];
-export const TARGETS = TARGETS_TEST;
-
+export const TARGETS = TARGETS_4;
 export const ATTACK_THRESH = 0.75;
