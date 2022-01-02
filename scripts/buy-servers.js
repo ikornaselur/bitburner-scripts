@@ -1,17 +1,6 @@
-import { TARGETS, PREFIX, RAM } from "/scripts/constants.js";
-import {
-    humanReadableMoney,
-    executeAttack,
-    scpAttackScripts,
-} from "/scripts/utils.js";
+import { PREFIX, RAM } from "/scripts/constants.js";
+import { humanReadableMoney } from "/scripts/utils.js";
 
-/* Rough prices
- * 512GB ~$28m
- * 1TB ~$56m
- * 2TB ~$112m
- * 4TB ~$224m
- * 8TB ~$448m
- */
 
 /** @param {NS} ns **/
 export async function main(ns) {
@@ -34,10 +23,7 @@ export async function main(ns) {
             const hostname = `${PREFIX}${i}`;
             ns.tprint(`Purchasing server: ${hostname}`);
             ns.purchaseServer(hostname, RAM);
-            await scpAttackScripts(ns, hostname);
-
-            executeAttack(ns, hostname, TARGETS, RAM);
-
+            
             i++;
         }
     }
