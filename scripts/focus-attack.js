@@ -14,7 +14,7 @@ export async function main(ns) {
     const target = ns.args[0];
     const hostname = ns.getHostname();
 
-    const minSecurity = ns.getServerMinSecurityLevel(target);
+    const minSecurity = ns.getServerMinSecurityLevel(target) + 10;
     const maxMoney = ns.getServerMaxMoney(target);
 
     while (true) {
@@ -52,6 +52,10 @@ export async function main(ns) {
             `[${hostname}] Hacking with ${requiredHackThreads} threads for 50% of the money`
         );
         const stolen = await ns.hack(target, { threads: requiredHackThreads });
-        ns.tprint(`[${hostname}] $$$ Stole ${humanReadableMoney(stolen)} $$$`);
+        if (stolen > 0) {
+            ns.tprint(
+                `[${hostname}] $$$ Stole ${humanReadableMoney(stolen)} $$$`
+            );
+        }
     }
 }
