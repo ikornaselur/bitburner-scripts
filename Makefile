@@ -2,4 +2,4 @@ server:
 	cd scripts && python -m http.server 9999
 
 prettier:
-	prettier scripts/*.js --write --tab-width 4
+	prettier scripts/*.js --write

@@ -8,6 +8,10 @@
   },
   "author": "",
   "license": "ISC",
+  "prettier": {
+    "quoteProps": "consistent",
+    "tabWidth": 4
+  },
   "dependencies": {
     "prettier": "^2.5.1"
   }
