@@ -2,6 +2,9 @@ import { SERVERS_MAP } from "/scripts/constants.js";
 
 /** @param {NS} ns **/
 export async function main(ns) {
+    const hackTools = ['BruteSSH', 'FTPCrack', 'HTTPWorm', 'SQLInject', 'relaySMTP'];
+    const toolCount = hackTools.filter(tool => ns.fileExists(`${tool}.exe`)).length;
+
     for (const server of SERVERS_MAP[0]) {
         if (!ns.hasRootAccess(server)) {
             ns.tprint(`Getting root access on ${server}`);
@@ -9,7 +12,7 @@ export async function main(ns) {
         }
     }
 
-    if (!ns.fileExists("BruteSSH.exe")) {
+    if (toolCount < 1) {
         return;
     }
 
@@ -21,7 +24,7 @@ export async function main(ns) {
         }
     }
 
-    if (!ns.fileExists("FTPCrack.exe")) {
+    if (toolCount < 2) {
         return;
     }
 
@@ -34,7 +37,7 @@ export async function main(ns) {
         }
     }
 
-    if (!ns.fileExists("HTTPWorm.exe")) {
+    if (toolCount < 3) {
         return;
     }
 
@@ -48,7 +51,7 @@ export async function main(ns) {
         }
     }
 
-    if (!ns.fileExists("SQLInject.exe")) {
+    if (toolCount < 4) {
         return;
     }
 
@@ -63,7 +66,7 @@ export async function main(ns) {
         }
     }
 
-    if (!ns.fileExists("relaySMTP.exe")) {
+    if (toolCount < 5) {
         return;
     }
 
