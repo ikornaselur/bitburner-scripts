@@ -91,7 +91,6 @@ export const SERVERS = Object.values(SERVERS_MAP).flat();
  ** 256TB: $14.4B
  **/
 export const PREFIX = "serv-";
-export const RAM = 1024 * 256;
 
 export const TARGETS_0 = ["joesguns"];
 export const TARGETS_1 = ["iron-gym"];
