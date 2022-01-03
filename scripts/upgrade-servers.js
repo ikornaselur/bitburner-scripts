@@ -30,7 +30,7 @@ function getLowestSpec(ns) {
 
 /** @param {NS} ns **/
 export async function main(ns) {
-    const RAM = parseInt(ns.args[0]) * 1024;  // GB
+    const RAM = parseInt(ns.args[0]) * 1024; // GB
     // Store cost of the server
     const serverCost = ns.getPurchasedServerCost(RAM);
 

@@ -2,8 +2,16 @@ import { SERVERS_MAP } from "/scripts/constants.js";
 
 /** @param {NS} ns **/
 export async function main(ns) {
-    const hackTools = ['BruteSSH', 'FTPCrack', 'HTTPWorm', 'SQLInject', 'relaySMTP'];
-    const toolCount = hackTools.filter(tool => ns.fileExists(`${tool}.exe`)).length;
+    const hackTools = [
+        "BruteSSH",
+        "FTPCrack",
+        "HTTPWorm",
+        "SQLInject",
+        "relaySMTP",
+    ];
+    const toolCount = hackTools.filter((tool) =>
+        ns.fileExists(`${tool}.exe`)
+    ).length;
 
     for (const server of SERVERS_MAP[0]) {
         if (!ns.hasRootAccess(server)) {
