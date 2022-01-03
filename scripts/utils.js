@@ -108,3 +108,17 @@ export function executeFocus(ns, server, target) {
 
   ns.exec("/scripts/focus-attack.js", server, threads, target);
 }
+
+/** @param {NS} ns
+ ** @param {string} server
+ ** @param {string} target
+ **/
+export function executeHyper(ns, server, target) {
+  const serverRam = ns.getServerMaxRam(server);
+  const ramReq = ns.getScriptRam("/scripts/hyper/runner.js");
+  const threads = Math.floor(serverRam / ramReq) / 2;
+
+  ns.killall(server);
+
+  ns.exec("/scripts/hyper/runner.js", server, threads, target);
+}

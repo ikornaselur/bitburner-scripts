@@ -12,7 +12,6 @@ export async function main(ns) {
   const ownedTools = hackTools.filter((tool) => ns.fileExists(`${tool}.exe`));
 
   for (let serverIdx = 0; serverIdx < ownedTools.length + 1; serverIdx++) {
-    ns.tprint(`serverIdx: ${serverIdx}`);
     for (const server of SERVERS_MAP[serverIdx]) {
       if (!ns.hasRootAccess(server)) {
         ns.tprint(`[${server}] Getting root access`);

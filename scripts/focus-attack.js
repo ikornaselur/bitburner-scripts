@@ -31,7 +31,7 @@ export async function main(ns) {
       }
 
       // Get required threads for 100% growth
-      const requiredThreads = ns.growthAnalyze(target, 100, 3);
+      const requiredThreads = ns.growthAnalyze(target, 100, 1);
 
       ns.print(
         `[${hostname}] Current money (${humanReadableMoney(
