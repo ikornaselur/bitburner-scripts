@@ -71,6 +71,13 @@ export async function main(ns) {
     let targetIdx = parseInt(ns.args[0]);
     let serverIdx = 0;
 
+    const maxVal = Object.keys(MONEY_MAP).length - 25;
+
+    if (targetIdx > maxVal) {
+        ns.tprint(`Specify a value below ${maxVal}`);
+        ns.exit();
+    }
+
     ns.tprint("Copying attack script to servers");
 
     while (serverIdx < 25) {
