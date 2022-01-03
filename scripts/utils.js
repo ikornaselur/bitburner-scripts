@@ -9,6 +9,9 @@ export function humanReadable(value) {
     while (value > 1000) {
         value = value / 1000;
         idx += 1;
+        if (idx > postfixes.length) {
+            break;
+        }
     }
 
     return `${value.toFixed(2)}${postfixes[idx]}`;
@@ -25,6 +28,9 @@ export function humanReadableRAM(value) {
     while (value > 1024) {
         value = value / 1024;
         idx += 1;
+        if (idx > postfixes.length) {
+            break;
+        }
     }
 
     return `${value.toFixed(1)}${postfixes[idx]}`;
