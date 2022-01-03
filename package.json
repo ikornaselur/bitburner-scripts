@@ -10,7 +10,7 @@
   "license": "ISC",
   "prettier": {
     "quoteProps": "consistent",
-    "tabWidth": 4
+    "tabWidth": 2
   },
   "dependencies": {
     "prettier": "^2.5.1"
