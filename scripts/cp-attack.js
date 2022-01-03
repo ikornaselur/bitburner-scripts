@@ -3,6 +3,8 @@ import { executeAttack, scpAttackScripts } from "/scripts/utils.js";
 
 /** @param {NS} ns **/
 export async function main(ns) {
+    ns.tprint("DEPRECATED!!");
+    ns.exit();
     ns.tprint("Copying attack script to servers");
     for (const server of SERVERS) {
         ns.tprint(`[${server}] Checking server...`);
