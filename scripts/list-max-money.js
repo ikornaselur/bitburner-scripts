@@ -7,6 +7,7 @@ export async function main(ns) {
 
   const userHackingLevel = ns.getHackingLevel();
   const results = [];
+
   for (const server of SERVERS) {
     // Skip the serv-X servers
     if (server.startsWith("serv-")) {
@@ -17,18 +18,30 @@ export async function main(ns) {
     results.push({
       server,
       maxMoney,
-      hackable: serverHackingLevel < userHackingLevel,
+      hackingLevel: serverHackingLevel,
     });
   }
   results.sort((a, b) => a.maxMoney - b.maxMoney);
 
   ns.tprint("--- Not hackable ---");
-  for (const result of results.filter((res) => !res.hackable)) {
-    ns.tprint(`[${result.server}] ${humanReadableMoney(result.maxMoney)}`);
+  for (const result of results.filter(
+    (res) => res.hackingLevel > userHackingLevel
+  )) {
+    ns.tprint(
+      `${humanReadableMoney(result.maxMoney)}\t${result.hackingLevel}\t${
+        result.server
+      }`
+    );
   }
 
   ns.tprint("--- Hackable ---");
-  for (const result of results.filter((res) => res.hackable)) {
-    ns.tprint(`[${result.server}] ${humanReadableMoney(result.maxMoney)}`);
+  for (const result of results.filter(
+    (res) => res.hackingLevel <= userHackingLevel
+  )) {
+    ns.tprint(
+      `${humanReadableMoney(result.maxMoney)}\t${result.hackingLevel}\t${
+        result.server
+      }`
+    );
   }
 }
