@@ -30,7 +30,7 @@ function getLowestSpec(ns) {
 
 /** @param {NS} ns **/
 export async function main(ns) {
-  const RAM = parseInt(ns.args[0]) * 1024; // GB
+  const RAM = parseInt(ns.args[0]) * 1024; // TB
   // Store cost of the server
   const serverCost = ns.getPurchasedServerCost(RAM);
 
@@ -63,7 +63,7 @@ export async function main(ns) {
     ns.purchaseServer(hostname, RAM);
     await scpAttackScripts(ns, hostname);
 
-    executeAttack(ns, hostname, TARGETS, RAM);
+    // executeAttack(ns, hostname, TARGETS, RAM);
     await ns.sleep(200);
   }
 }
