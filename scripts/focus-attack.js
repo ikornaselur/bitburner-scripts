@@ -1,8 +1,8 @@
 import { humanReadableMoney } from "/scripts/utils.js";
 
 /** @param {NS} ns **/
-export function getCurrentThreads(ns) {
-  let ps = ns.ps("home");
+function getCurrentThreads(ns) {
+  let ps = ns.ps(ns.getHostname());
   let current = ps.filter(
     (process) => process.filename.indexOf("focus-attack.js") > -1
   )[0];
@@ -40,7 +40,9 @@ export async function main(ns) {
           maxMoney
         )}), increasing with ${requiredThreads} threads`
       );
-      await ns.grow(target, { threads: requiredThreads });
+      await ns.grow(target, {
+        threads: Math.min(requiredThreads, getCurrentThreads(ns)),
+      });
       currentMoney = ns.getServerMoneyAvailable(target);
     }
     ns.print(`[${hostname}] Money at ${humanReadableMoney(currentMoney)}`);
@@ -51,7 +53,9 @@ export async function main(ns) {
     ns.print(
       `[${hostname}] Hacking with ${requiredHackThreads} threads for 50% of the money`
     );
-    const stolen = await ns.hack(target, { threads: requiredHackThreads });
+    const stolen = await ns.hack(target, {
+      threads: Math.min(requiredHackThreads, getCurrentThreads(ns)),
+    });
     if (stolen > 0) {
       ns.tprint(`[${hostname}] $$$ Stole ${humanReadableMoney(stolen)} $$$`);
     }
