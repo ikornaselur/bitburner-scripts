@@ -24,12 +24,20 @@ export async function main(ns) {
       // Security level
       headers.push("Sec");
       const sec = ns.getServerSecurityLevel(target);
-      values.push(`${sec.toFixed(1)}/${minSec}`);
+      values.push(`${sec.toFixed(1)}/${minSec.toFixed(1)}`);
 
       // Cash
       headers.push("$$$");
       const money = ns.getServerMoneyAvailable(target);
       values.push(`${humanReadableMoney(money)}/${humanReadableMoney(maxMoney)}`);
+
+      // Income
+      headers.push("Income");
+      values.push(`${humanReadableMoney(ns.getScriptIncome()[0])}/s`);
+
+      // Exp
+      headers.push("Exp");
+      values.push(`${humanReadableMoney(ns.getScriptExpGain())}/s`);
 
       hook0.innerText = headers.join(" \n");
       hook1.innerText = values.join("\n");
