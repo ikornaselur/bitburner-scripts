@@ -9,11 +9,13 @@ const BACKDOOR_TARGETS = ["CSEC", "I.I.I.I", "avmnite-02h", "run4theh111z"];
 async function find(ns, current, target, path, visited, backdoor) {
   if (current === target) {
     let output = path
-        .concat(current)
-        .slice(1)
-        .map((server) => `ssh ${server}`)
-        .join("; ")
+      .concat(current)
+      .slice(1)
+      .map((server) => `ssh ${server}`)
+      .join("; ");
     if (backdoor) {
+      const hackLevel = ns.getServerRequiredHackingLevel(target);
+      ns.tprint(`${target} Hack level: ${hackLevel}`);
       output += "; backdoor";
     }
     ns.tprint(output);
@@ -24,7 +26,16 @@ async function find(ns, current, target, path, visited, backdoor) {
       .filter((s) => visited.indexOf(s) === -1);
     for (const connected of connectedServers) {
       visited.push(connected);
-      if (await find(ns, connected, target, path.concat(current), visited, backdoor)) {
+      if (
+        await find(
+          ns,
+          connected,
+          target,
+          path.concat(current),
+          visited,
+          backdoor
+        )
+      ) {
         return true;
       }
       await ns.sleep(10);
