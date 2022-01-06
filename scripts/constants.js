@@ -44,7 +44,7 @@ export const SERVERS_MAP = {
     ".",
   ],
   5: [
-    "darkweb",
+    // "darkweb",
     "zb-institute",
     "aerocorp",
     "galactic-cyber",
@@ -132,5 +132,5 @@ export const TARGETS_TEST = [
   "alpha-ent",
   "rho-construction",
 ];
-export const TARGETS = TARGETS_4;
+export const TARGETS = TARGETS_0;
 export const ATTACK_THRESH = 0.75;
