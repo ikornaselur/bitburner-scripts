@@ -3,7 +3,10 @@ import { humanReadableMoney, humanReadableRAM } from "/scripts/utils.js";
 
 /** @param {NS} ns **/
 export async function main(ns) {
-  const RAM = parseInt(ns.args[0]) * 1024; // In GB
+  let RAM = parseInt(ns.args[0]); // GB
+  if (ns.args[1] === "TB") {
+    RAM *= 1024;
+  }
 
   // Store cost of the server
   const serverCost = ns.getPurchasedServerCost(RAM);
@@ -24,7 +27,13 @@ export async function main(ns) {
   }
 
   while (i < ns.getPurchasedServerLimit()) {
-    if (ns.getServerMoneyAvailable("home") < serverCost) {
+    const currentMoney = ns.getServerMoneyAvailable("home");
+    if (currentMoney < serverCost) {
+      ns.print(
+        `${humanReadableMoney(currentMoney)} < ${humanReadableMoney(
+          serverCost
+        )}`
+      );
       ns.print("Can't afford new server, sleeping for 60 seconds...");
       await ns.sleep(60 * 1000);
     } else {
