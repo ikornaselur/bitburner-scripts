@@ -66,14 +66,7 @@ export function executeAttack(ns, server, target, ram, killall) {
     return;
   }
 
-  ns.exec(
-    "/scripts/attack.js",
-    server,
-    threads,
-    target,
-    "--moneyThresh",
-    ATTACK_THRESH
-  );
+  ns.exec("/scripts/attack.js", server, threads, target);
 }
 
 /** @param {NS} ns

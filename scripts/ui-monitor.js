@@ -1,20 +1,19 @@
-import { humanReadableMoney } from '/scripts/utils.js';
-
+import { humanReadableMoney } from "/scripts/utils.js";
 
 /** @param {NS} ns **/
 export async function main(ns) {
-  const doc = globalThis['document'];
+  const doc = globalThis["document"];
   const target = ns.args[0];
 
-  const hook0 = doc.getElementById('overview-extra-hook-0');
-  const hook1 = doc.getElementById('overview-extra-hook-1');
+  const hook0 = doc.getElementById("overview-extra-hook-0");
+  const hook1 = doc.getElementById("overview-extra-hook-1");
 
   const minSec = ns.getServerMinSecurityLevel(target);
   const maxMoney = ns.getServerMaxMoney(target);
 
   while (true) {
     try {
-      const headers = []
+      const headers = [];
       const values = [];
 
       // Server
@@ -29,7 +28,9 @@ export async function main(ns) {
       // Cash
       headers.push("$$$");
       const money = ns.getServerMoneyAvailable(target);
-      values.push(`${humanReadableMoney(money)}/${humanReadableMoney(maxMoney)}`);
+      values.push(
+        `${humanReadableMoney(money)}/${humanReadableMoney(maxMoney)}`
+      );
 
       // Income
       headers.push("Income");
