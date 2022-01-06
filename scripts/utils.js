@@ -49,50 +49,31 @@ export async function scpAttackScripts(ns, server) {
 
 /** @param {NS} ns
  ** @param {string} server
- ** @param {Array<string>} targets
+ ** @param {string} target
  ** @params {number} ram
  ** @params {boolean} killall
  **/
-export function executeAttack(ns, server, targets, ram, killall) {
+export function executeAttack(ns, server, target, ram, killall) {
   const attackRamReq = ns.getScriptRam("/scripts/attack.js");
   ns.tprint(`Attack RAM requirements: ${humanReadableRAM(attackRamReq)}`);
   let threads = Math.floor(ram / attackRamReq);
-  if (threads > 100) {
-    threads -= 10;
-  } else if (threads < 1) {
-    // Exit early if no threads available
-    ns.tprint("Not enough threads to initiate attack, aborting");
-    return;
-  }
+
   if (killall === undefined || killall) {
     ns.killall(server);
   }
 
-  if (threads < targets.length * 10) {
-    ns.tprint(
-      `[${server}] Executing attack on just "${targets[0]}" because of lack of threads`
-    );
-    ns.exec(
-      "/scripts/attack.js",
-      server,
-      threads,
-      targets[0],
-      "--moneyThresh",
-      ATTACK_THRESH
-    );
-  } else {
-    ns.tprint(`[${server}] Executing attack on "${targets}"`);
-    for (const target of targets) {
-      ns.exec(
-        "/scripts/attack.js",
-        server,
-        Math.floor(threads / targets.length),
-        target,
-        "--moneyThresh",
-        ATTACK_THRESH
-      );
-    }
+  if (threads <= 0) {
+    return;
   }
+
+  ns.exec(
+    "/scripts/attack.js",
+    server,
+    threads,
+    target,
+    "--moneyThresh",
+    ATTACK_THRESH
+  );
 }
 
 /** @param {NS} ns
