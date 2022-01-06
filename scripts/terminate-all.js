@@ -1,5 +1,9 @@
 /** @param {NS} ns **/
 export async function main(ns) {
+  let servOnly = false;
+  if (ns.args[0] === "serv") {
+    servOnly = true;
+  }
   const servers = {
     home: false,
   };
@@ -11,8 +15,12 @@ export async function main(ns) {
   ) {
     for (const server of unscanned) {
       ns.tprint(`Scanning ${server}`);
-      if (server !== "home") {
+      if (servOnly && server.indexOf("serv-") > -1) {
         ns.killall(server);
+      } else {
+        if (server !== "home") {
+          ns.killall(server);
+        }
       }
       const connectedServers = ns.scan(server);
       servers[server] = true;
