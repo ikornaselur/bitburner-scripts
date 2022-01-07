@@ -33,7 +33,7 @@ export async function main(ns) {
       await ns.sleep(1000);
       continue;
     }
-    if (hackRam > availableRam || ns.getServerSecurityLevel(target) > minSecurity + 5) {
+    if (hackRam > availableRam || ns.getServerSecurityLevel(target) > minSecurity * 3) {
       await ns.sleep(1000);
       continue;
     }
