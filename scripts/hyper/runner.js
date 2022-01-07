@@ -3,7 +3,21 @@ import { humanReadableMoney } from "/scripts/utils.js";
 const WEAKEN = "/scripts/hyper/weaken.js";
 const GROW = "/scripts/hyper/grow.js";
 const HACK = "/scripts/hyper/hack.js";
+const STATUS = "/scripts/hyper/status.js";
 
+/** @param {NS} ns
+ * @param {string} state
+ */
+function setStatus(ns, state) {
+  for (const process of ns.ps()) {
+    if (process.filename === STATUS) {
+      ns.kill(process.pid);
+    }
+  }
+  ns.run(STATUS, 1, state);
+}
+
+/** @param {NS} ns **/
 function getAvailableRam(ns) {
   // Calculate number of threads possible for weaken
   const hostname = ns.getHostname();
@@ -22,6 +36,8 @@ export async function main(ns) {
 
   const minSecurity = ns.getServerMinSecurityLevel(target);
   const maxMoney = ns.getServerMaxMoney(target);
+
+  setStatus(ns, "Prepping");
 
   let prepped = false;
   while (!prepped) {
@@ -113,9 +129,16 @@ export async function main(ns) {
         Math.max(1, Math.floor(weakenTime / hackTime))
       );
 
-      await ns.sleep(weakenTime + 10);
+      // TODO: Check for hacking status, which could be retrying
+      setStatus(ns, "Hacking");
+      await ns.sleep(hackTime);
+      setStatus(ns, "Growing");
+      await ns.sleep(growTime - hackTime);
+      setStatus(ns, "Weakening");
+      await ns.sleep(weakenTime - growTime + 10);
     } else {
       ns.run(HACK, hackThreads, target);
+      setStatus(ns, "Hacking");
       await ns.sleep(hackTime + 10);
 
       while (ns.getServerSecurityLevel(target) > minSecurity + 10) {
@@ -125,6 +148,7 @@ export async function main(ns) {
           getAvailableRam(ns) / ns.getScriptRam(WEAKEN)
         );
 
+        setStatus(ns, "Weakening");
         ns.run(WEAKEN, weakenThreadsSeq, target);
         await ns.sleep(weakenTimeSeq + 10);
       }
@@ -139,6 +163,7 @@ export async function main(ns) {
           maxGrowThreads
         );
 
+        setStatus(ns, "Growing");
         ns.run(GROW, growThreadsSeq, target);
         await ns.sleep(growTimeSeq + 10);
       }

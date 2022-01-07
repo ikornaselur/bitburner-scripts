@@ -100,6 +100,7 @@ export async function main(ns) {
         "/scripts/hyper/weaken.js",
         "/scripts/hyper/hack.js",
         "/scripts/hyper/grow.js",
+        "/scripts/hyper/status.js",
       ],
       server
     );
