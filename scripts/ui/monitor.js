@@ -1,4 +1,4 @@
-import { humanReadableMoney } from "/scripts/utils.js";
+import { humanReadableMoney, humanReadable } from "/scripts/utils.js";
 
 /** @param {NS} ns **/
 export async function main(ns) {
@@ -38,7 +38,7 @@ export async function main(ns) {
 
       // Exp
       headers.push("Exp");
-      values.push(`${humanReadableMoney(ns.getScriptExpGain())}/s`);
+      values.push(`${humanReadable(ns.getScriptExpGain())}/s`);
 
       hook0.innerText = headers.join(" \n");
       hook1.innerText = values.join("\n");
