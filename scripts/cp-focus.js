@@ -14,7 +14,7 @@ const MONEY_MAP = {
   "max-hardware": "$250.00M",
   "iron-gym": "$500.00M",
   "phantasy": "$600.00M",
-  "silver-helix": "$1.13B",
+  // "silver-helix": "$1.13B",
   "crush-fitness": "$1.42B",
   "omega-net": "$1.59B",
   "johnson-ortho": "$1.99B",
@@ -71,6 +71,8 @@ export async function main(ns) {
   let targetIdx = parseInt(ns.args[0]);
   let serverIdx = 0;
 
+  const userHackingLevel = ns.getHackingLevel();
+
   const maxVal = Object.keys(MONEY_MAP).length - 25;
 
   if (targetIdx > maxVal) {
@@ -81,8 +83,25 @@ export async function main(ns) {
   ns.tprint("Copying attack script to servers");
 
   while (serverIdx < 25) {
-    const target = Object.keys(MONEY_MAP)[targetIdx];
     const server = `serv-${serverIdx}`;
+    let target;
+    while (true) {
+      target = Object.keys(MONEY_MAP)[targetIdx];
+      if (target === undefined) {
+        ns.tprint("ERROR Ran out of valid servers");
+        return;
+      }
+      const serverHackingLevel = ns.getServerRequiredHackingLevel(target);
+      if (serverHackingLevel > userHackingLevel) {
+        ns.tprint(
+          `WARN [${server}] user hacking level (${userHackingLevel}) too low for ${target} (${serverHackingLevel})`
+        );
+        targetIdx++;
+      } else {
+        break;
+      }
+      await ns.sleep(100);
+    }
 
     while (!ns.serverExists(server)) {
       ns.print("Server not bought yet, sleeping for 60 seconds...");
@@ -104,6 +123,6 @@ export async function main(ns) {
     executeFocus(ns, server, target);
     serverIdx++;
     targetIdx++;
-    await ns.sleep(250);
+    await ns.sleep(100);
   }
 }
