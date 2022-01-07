@@ -1,5 +1,3 @@
-import { ATTACK_THRESH } from "/scripts/constants.js";
-
 /** @param {number} value
  **/
 export function humanReadable(value) {
