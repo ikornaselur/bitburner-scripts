@@ -1,5 +1,4 @@
-import { humanReadableMoney } from '/scripts/utils.js';
-
+import { humanReadableMoney } from "/scripts/utils.js";
 
 /** @param {NS} ns **/
 export async function main(ns) {
@@ -14,10 +13,16 @@ export async function main(ns) {
     const res = await ns.hack(ns.args[0]);
 
     if (res > 0) {
-      ns.tprint(`SUCCESS [${hostname}] $$$ Stole ${humanReadableMoney(res)} from ${ns.args[0]}!`);
+      ns.tprint(
+        `SUCCESS [${hostname}] $$$ Stole ${humanReadableMoney(res)} from ${
+          ns.args[0]
+        }!`
+      );
       break;
     } else {
-      ns.tprint(`WARN [${hostname}] failed stealing from ${ns.args[0]}! Attempts left: ${attempts}`);
+      ns.tprint(
+        `WARN [${hostname}] failed stealing from ${ns.args[0]}! Attempts left: ${attempts}`
+      );
     }
   }
 }

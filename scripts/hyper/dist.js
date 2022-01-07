@@ -1,13 +1,12 @@
-const HACK = '/scripts/hyper/hack.js';
+const HACK = "/scripts/hyper/hack.js";
 
 function getAvailableRam(ns) {
-    // Calculate number of threads possible for weaken
-    const hostname = ns.getHostname();
-    const maxRam = ns.getServerMaxRam(hostname);
-    const usedRam = ns.getServerUsedRam(hostname);
-    return maxRam - usedRam - 5;  // Leave ~5GB additional for ad-hoc scripts
+  // Calculate number of threads possible for weaken
+  const hostname = ns.getHostname();
+  const maxRam = ns.getServerMaxRam(hostname);
+  const usedRam = ns.getServerUsedRam(hostname);
+  return maxRam - usedRam - 5; // Leave ~5GB additional for ad-hoc scripts
 }
-
 
 /** @param {NS} ns **/
 export async function main(ns) {
@@ -33,7 +32,10 @@ export async function main(ns) {
       await ns.sleep(1000);
       continue;
     }
-    if (hackRam > availableRam || ns.getServerSecurityLevel(target) > minSecurity * 3) {
+    if (
+      hackRam > availableRam ||
+      ns.getServerSecurityLevel(target) > minSecurity * 3
+    ) {
       await ns.sleep(1000);
       continue;
     }
