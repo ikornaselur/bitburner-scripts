@@ -14,7 +14,7 @@ function setStatus(ns, state, sleepTime) {
       ns.kill(process.pid);
     }
   }
-  ns.run(STATUS, 1, state, sleepTime);
+  ns.run(STATUS, 1, state, sleepTime, Date.now());
 }
 
 /** @param {NS} ns **/
