@@ -3,11 +3,9 @@ import { humanReadableMoney, humanReadable } from "/scripts/utils.js";
 /** @param {NS} ns
  * @param {number} idx
  */
-function getServerStatus(ns, idx) {
-  const server = `serv-${idx}`;
-
+function getServerStatus(ns, server) {
   if (!ns.serverExists(server)) {
-    return "Offline";
+    return "<span style='color: red;'>Offline</span>";
   }
 
   const ps = ns.ps(server);
@@ -17,11 +15,14 @@ function getServerStatus(ns, idx) {
   );
 
   if (state.length === 0) {
-    return "No status";
+    return "<span style='color: gray;'>Idle</span>";
   }
 
   const status = state[0].args[0];
   if (status !== undefined) {
+    if (status.indexOf("Prep") > -1) {
+      return `<span style='color: yellow;'>${status}</span>`;
+    }
     return status;
   }
 
@@ -48,13 +49,18 @@ export async function main(ns) {
       headers.push("Exp");
       values.push(`${humanReadable(ns.getScriptExpGain())}/s`);
 
+      // Server statuses
+      headers.push("home");
+      values.push(getServerStatus(ns, "home"));
+
       for (let i = 0; i < 25; i++) {
-        headers.push(`serv-${i}`);
-        values.push(getServerStatus(ns, i));
+        const server = `serv-${i}`;
+        headers.push(server);
+        values.push(getServerStatus(ns, server));
       }
 
-      hook0.innerText = headers.join(" \n");
-      hook1.innerText = values.join("\n");
+      hook0.innerHTML = headers.join(" <br/>");
+      hook1.innerHTML = values.join(" <br/>");
     } catch (err) {
       ns.print("ERROR: Update Skipped: " + String(err));
     }

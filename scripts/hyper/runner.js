@@ -8,13 +8,13 @@ const STATUS = "/scripts/hyper/status.js";
 /** @param {NS} ns
  * @param {string} state
  */
-function setStatus(ns, state) {
+function setStatus(ns, state, sleepTime) {
   for (const process of ns.ps()) {
     if (process.filename === STATUS) {
       ns.kill(process.pid);
     }
   }
-  ns.run(STATUS, 1, state);
+  ns.run(STATUS, 1, state, sleepTime);
 }
 
 /** @param {NS} ns **/
@@ -37,7 +37,6 @@ export async function main(ns) {
   const minSecurity = ns.getServerMinSecurityLevel(target);
   const maxMoney = ns.getServerMaxMoney(target);
 
-  setStatus(ns, "Prepping");
 
   let prepped = false;
   while (!prepped) {
@@ -52,6 +51,7 @@ export async function main(ns) {
       );
 
       ns.run(WEAKEN, weakenThreads, target);
+      setStatus(ns, "Prepping (W)", weakenTime);
       await ns.sleep(weakenTime + 10);
     }
 
@@ -69,6 +69,7 @@ export async function main(ns) {
       );
 
       ns.run(GROW, growThreads, target);
+      setStatus(ns, "Prepping (G)", growTime);
       await ns.sleep(growTime + 10);
     }
   }
@@ -130,15 +131,15 @@ export async function main(ns) {
       );
 
       // TODO: Check for hacking status, which could be retrying
-      setStatus(ns, "Hacking");
+      setStatus(ns, "Hacking", hackTime);
       await ns.sleep(hackTime);
-      setStatus(ns, "Growing");
+      setStatus(ns, "Growing", growTime - hackTime);
       await ns.sleep(growTime - hackTime);
-      setStatus(ns, "Weakening");
+      setStatus(ns, "Weakening", weakenTime - growTime);
       await ns.sleep(weakenTime - growTime + 10);
     } else {
       ns.run(HACK, hackThreads, target);
-      setStatus(ns, "Hacking");
+      setStatus(ns, "Hacking", hackTime);
       await ns.sleep(hackTime + 10);
 
       while (ns.getServerSecurityLevel(target) > minSecurity + 10) {
@@ -148,7 +149,7 @@ export async function main(ns) {
           getAvailableRam(ns) / ns.getScriptRam(WEAKEN)
         );
 
-        setStatus(ns, "Weakening");
+        setStatus(ns, "Weakening", weakenTimeSeq);
         ns.run(WEAKEN, weakenThreadsSeq, target);
         await ns.sleep(weakenTimeSeq + 10);
       }
@@ -163,7 +164,7 @@ export async function main(ns) {
           maxGrowThreads
         );
 
-        setStatus(ns, "Growing");
+        setStatus(ns, "Growing", growTimeSeq);
         ns.run(GROW, growThreadsSeq, target);
         await ns.sleep(growTimeSeq + 10);
       }
