@@ -1,4 +1,4 @@
-import { SERVERS, PREFIX } from "/scripts/constants.js";
+import { SERVERS, NODES } from "/scripts/constants.js";
 import { humanReadableMoney } from "/scripts/utils.js";
 
 /** @param {NS} ns **/
@@ -10,7 +10,7 @@ export async function main(ns) {
 
   for (const server of SERVERS) {
     // Skip the serv-X servers
-    if (server.startsWith(PREFIX)) {
+    if (NODES.indexOf(server) > -1) {
       continue;
     }
     const maxMoney = ns.getServerMaxMoney(server);

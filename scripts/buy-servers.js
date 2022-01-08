@@ -1,4 +1,4 @@
-import { PREFIX } from "/scripts/constants.js";
+import { NODES } from "/scripts/constants.js";
 import { humanReadableMoney, humanReadableRAM } from "/scripts/utils.js";
 
 /** @param {NS} ns **/
@@ -21,8 +21,8 @@ export async function main(ns) {
   // Base server idx
   let i = 0;
   // Skip servers that already exist
-  while (ns.serverExists(`${PREFIX}${i}`)) {
-    ns.tprint(`${PREFIX}${i} already exists, skipping...`);
+  while (ns.serverExists(NODES[i])) {
+    ns.tprint(`${NODES[i]}$ already exists, skipping...`);
     i++;
   }
 
@@ -37,7 +37,7 @@ export async function main(ns) {
       ns.print("Can't afford new server, sleeping for 10 seconds...");
       await ns.sleep(10 * 1000);
     } else {
-      const hostname = `${PREFIX}${i}`;
+      const hostname = NODES[i];
       ns.tprint(`Purchasing server: ${hostname}`);
       ns.purchaseServer(hostname, RAM);
 

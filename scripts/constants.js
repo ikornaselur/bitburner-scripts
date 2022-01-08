@@ -90,7 +90,33 @@ export const SERVERS = Object.values(SERVERS_MAP).flat();
  ** 128TB: $7.2B
  ** 256TB: $14.4B
  **/
-export const PREFIX = "serv-";
+export const NODES = [
+  "alethkar",
+  "jah-keved",
+  "herdaz",
+  "emul",
+  "azir",
+  "thaylenah",
+  "shinovar",
+  "triax",
+  "greater-hexi",
+  "marat",
+  "reshi-isles",
+  "tukar",
+  "yulay",
+  "marabethia",
+  "babatharnam",
+  "desh",
+  "frostlands",
+  "yezier",
+  "alm",
+  "tashikk",
+  "liafor",
+  "steen",
+  "aimia",
+  "iri",
+  "rira",
+];
 
 export const TARGETS_0 = ["joesguns"];
 export const TARGETS_1 = ["iron-gym"];

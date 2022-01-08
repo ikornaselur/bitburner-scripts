@@ -131,9 +131,9 @@ export async function main(ns) {
 
       // TODO: Check for hacking status, which could be retrying
       setStatus(ns, "Hacking", hackTime);
-      await ns.sleep(hackTime);
+      await ns.sleep(hackTime + 10);
       setStatus(ns, "Growing", growTime - hackTime);
-      await ns.sleep(growTime - hackTime);
+      await ns.sleep(growTime - hackTime + 10);
       setStatus(ns, "Weakening", weakenTime - growTime);
       await ns.sleep(weakenTime - growTime + 10);
     } else {

@@ -1,4 +1,4 @@
-import { PREFIX } from "/scripts/constants.js";
+import { NODES } from "/scripts/constants.js";
 import { humanReadableMoney, humanReadable } from "/scripts/utils.js";
 
 function getProgress(args) {
@@ -16,10 +16,6 @@ function getProgress(args) {
   return `${progress}%`;
 }
 
-/*
-  "primarylight":"#FFF","primary":"#F8F8F2","primarydark":"#FAFAEB","successlight":"#ADE146","success":"#A6E22E","successdark":"#98E104","errorlight":"#FF69A0","error":"#F92672","errordark":"#D10F56","secondarylight":"#AAA","secondary":"#888","secondarydark":"#666","warninglight":"#E1D992","warning":"#E6DB74","warningdark":"#EDDD54","infolight":"#92E1F1","info":"#66D9EF","infodark":"#31CDED","welllight":"#444","well":"#222","white":"#fff","black":"#000","hp":"#F92672","money":"#E6DB74","hack":"#A6E22E","combat":"#75715E","cha":"#AE81FF","int":"#66D9EF","rep":"#E69F66","disabled":"#66cfbc","backgroundprimary":"#272822","backgroundsecondary":"#1B1C18","button":"#333"}
-  */
-
 /** @param {NS} ns
  * @param {number} idx
  */
@@ -36,10 +32,6 @@ function getServerStatus(ns, server) {
   const state = ps.filter(
     (proc) => proc.filename === "/scripts/hyper/status.js"
   );
-  if (server === PREFIX) {
-    ns.print(ps);
-    ns.print(state);
-  }
 
   if (state.length === 0) {
     return `<span style='color: ${theme.secondary};'>Idle</span>`;
@@ -91,8 +83,7 @@ export async function main(ns) {
       headers.push(`<span style='color: ${theme.primary};'>home</span>`);
       values.push(getServerStatus(ns, "home"));
 
-      for (let i = 0; i < 25; i++) {
-        const server = `${PREFIX}${i}`;
+      for (const server of NODES) {
         headers.push(`<span style='color: white;'>${server}</span>`);
         values.push(getServerStatus(ns, server));
       }

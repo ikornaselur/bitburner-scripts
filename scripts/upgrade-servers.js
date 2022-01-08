@@ -1,8 +1,7 @@
-import { TARGETS, PREFIX } from "/scripts/constants.js";
+import { NODES } from "/scripts/constants.js";
 import {
   humanReadableMoney,
   humanReadableRAM,
-  executeAttack,
   scpAttackScripts,
 } from "/scripts/utils.js";
 
@@ -10,7 +9,7 @@ import {
 function getLowestSpec(ns) {
   let i = 0;
   let lowestRAM = 1024 * 1024;
-  let server = `${PREFIX}${i}`;
+  let server = NODES[i];
 
   let result = { server, lowestRAM };
 
@@ -22,7 +21,7 @@ function getLowestSpec(ns) {
     }
 
     i++;
-    server = `${PREFIX}${i}`;
+    server = NODES[i];
   }
 
   return result;
