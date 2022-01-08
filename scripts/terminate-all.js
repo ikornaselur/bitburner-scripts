@@ -1,4 +1,4 @@
-import { NODES } from "/scripts/utils.js";
+import { NODES } from "/scripts/constants.js";
 
 /** @param {NS} ns **/
 export async function main(ns) {
