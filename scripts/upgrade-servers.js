@@ -29,9 +29,18 @@ function getLowestSpec(ns) {
 
 /** @param {NS} ns **/
 export async function main(ns) {
-  const RAM = parseInt(ns.args[0]) * 1024; // TB
+  let RAM = parseInt(ns.args[0]); // GB
+  if (ns.args[1] === "TB") {
+    RAM *= 1024;
+  }
+
   // Store cost of the server
   const serverCost = ns.getPurchasedServerCost(RAM);
+  if (serverCost === Infinity) {
+    ns.tprint("Invalid RAM value");
+    ns.exit();
+  }
+
 
   while (true) {
     const lowestSpec = getLowestSpec(ns);
