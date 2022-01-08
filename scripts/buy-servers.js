@@ -11,7 +11,7 @@ export async function main(ns) {
   // Store cost of the server
   const serverCost = ns.getPurchasedServerCost(RAM);
   if (serverCost === Infinity) {
-    ns.tprint("Invalid RAM value");
+    ns.tprint("ERROR Invalid RAM value");
     ns.exit();
   }
   ns.tprint(
@@ -22,7 +22,7 @@ export async function main(ns) {
   let i = 0;
   // Skip servers that already exist
   while (ns.serverExists(NODES[i])) {
-    ns.tprint(`${NODES[i]}$ already exists, skipping...`);
+    ns.tprint(`INFO ${NODES[i]} already exists, skipping...`);
     i++;
   }
 
@@ -38,7 +38,7 @@ export async function main(ns) {
       await ns.sleep(10 * 1000);
     } else {
       const hostname = NODES[i];
-      ns.tprint(`Purchasing server: ${hostname}`);
+      ns.tprint(`SUCCESS Purchasing server: ${hostname}`);
       ns.purchaseServer(hostname, RAM);
 
       i++;
