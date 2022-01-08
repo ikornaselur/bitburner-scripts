@@ -85,8 +85,8 @@ export async function main(ns) {
     const server = `serv-${serverIdx}`;
 
     while (!ns.serverExists(server)) {
-      ns.print("Server not bought yet, sleeping for 60 seconds...");
-      await ns.sleep(60 * 1000);
+      ns.print("Server not bought yet, sleeping for 10 seconds...");
+      await ns.sleep(10 * 1000);
     }
 
     ns.tprint(

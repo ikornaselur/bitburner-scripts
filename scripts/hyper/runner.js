@@ -37,7 +37,6 @@ export async function main(ns) {
   const minSecurity = ns.getServerMinSecurityLevel(target);
   const maxMoney = ns.getServerMaxMoney(target);
 
-
   let prepped = false;
   while (!prepped) {
     prepped = true;

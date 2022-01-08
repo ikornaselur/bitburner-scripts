@@ -34,8 +34,8 @@ export async function main(ns) {
           serverCost
         )}`
       );
-      ns.print("Can't afford new server, sleeping for 60 seconds...");
-      await ns.sleep(60 * 1000);
+      ns.print("Can't afford new server, sleeping for 10 seconds...");
+      await ns.sleep(10 * 1000);
     } else {
       const hostname = `${PREFIX}${i}`;
       ns.tprint(`Purchasing server: ${hostname}`);
