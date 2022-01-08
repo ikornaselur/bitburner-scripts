@@ -2,7 +2,7 @@
 export async function main(ns) {
   const target = ns.args[0];
 
-  const securityThresh = ns.getServerMinSecurityLevel(target) + 2;
+  const securityThresh = ns.getServerMinSecurityLevel(target);
   ns.print(`Security threshold set to ${securityThresh}`);
 
   while (true) {
