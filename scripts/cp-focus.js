@@ -1,3 +1,4 @@
+import { PREFIX } from "/scripts/constants.js";
 import { executeFocus } from "/scripts/utils.js";
 
 const MONEY_MAP = {
@@ -83,7 +84,7 @@ export async function main(ns) {
   ns.tprint("Copying attack script to servers");
 
   while (serverIdx < 25) {
-    const server = `serv-${serverIdx}`;
+    const server = `${PREFIX}${serverIdx}`;
     let target;
     while (true) {
       target = Object.keys(MONEY_MAP)[targetIdx];

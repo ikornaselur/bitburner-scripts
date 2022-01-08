@@ -1,3 +1,4 @@
+import { PREFIX } from "/scripts/constants.js";
 import { executeHyper } from "/scripts/utils.js";
 
 const MONEY_MAP = {
@@ -82,7 +83,7 @@ export async function main(ns) {
 
   while (serverIdx < 25) {
     const target = Object.keys(MONEY_MAP)[targetIdx];
-    const server = `serv-${serverIdx}`;
+    const server = `${PREFIX}${serverIdx}`;
 
     while (!ns.serverExists(server)) {
       ns.print("Server not bought yet, sleeping for 10 seconds...");

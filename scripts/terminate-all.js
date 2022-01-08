@@ -1,3 +1,5 @@
+import { PREFIX } from "/scripts/utils.js";
+
 /** @param {NS} ns **/
 export async function main(ns) {
   let servOnly = false;
@@ -15,7 +17,7 @@ export async function main(ns) {
   ) {
     for (const server of unscanned) {
       ns.tprint(`Scanning ${server}`);
-      if (servOnly && server.indexOf("serv-") > -1) {
+      if (servOnly && server.indexOf(PREFIX) > -1) {
         ns.killall(server);
       } else {
         if (server !== "home") {

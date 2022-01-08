@@ -1,3 +1,4 @@
+import { PREFIX } from "/scripts/constants.js";
 import { humanReadableMoney, humanReadable } from "/scripts/utils.js";
 
 function getProgress(args) {
@@ -7,12 +8,12 @@ function getProgress(args) {
 
   const elapsed = now - startTime;
 
-  let progress = (elapsed / runTime * 100).toFixed(0);
+  let progress = ((elapsed / runTime) * 100).toFixed(0);
 
   if (progress >= 100) {
     progress = 100;
   }
-  return `${progress}%`
+  return `${progress}%`;
 }
 
 /*
@@ -35,7 +36,7 @@ function getServerStatus(ns, server) {
   const state = ps.filter(
     (proc) => proc.filename === "/scripts/hyper/status.js"
   );
-  if (server === "serv-0") {
+  if (server === PREFIX) {
     ns.print(ps);
     ns.print(state);
   }
@@ -91,7 +92,7 @@ export async function main(ns) {
       values.push(getServerStatus(ns, "home"));
 
       for (let i = 0; i < 25; i++) {
-        const server = `serv-${i}`;
+        const server = `${PREFIX}${i}`;
         headers.push(`<span style='color: white;'>${server}</span>`);
         values.push(getServerStatus(ns, server));
       }
