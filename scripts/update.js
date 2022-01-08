@@ -17,6 +17,7 @@ const SCRIPTS = [
   "hyper/weaken.js",
   "init-hack.js",
   "list-max-money.js",
+  "list-prices.js",
   "list-server-sizes.js",
   "ls.js",
   "scan.js",
