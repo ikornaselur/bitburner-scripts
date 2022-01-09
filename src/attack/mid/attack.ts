@@ -1,4 +1,4 @@
-import { NS } from 'bitburner';
+import { NS } from "bitburner";
 import { humanReadableMoney } from "/scripts/utils/format";
 
 const getCurrentThreads = (ns: NS): number => {
@@ -7,7 +7,7 @@ const getCurrentThreads = (ns: NS): number => {
     (process) => process.filename.indexOf("focus-attack.js") > -1
   )[0];
   return current.threads;
-}
+};
 
 export const main = async (ns: NS): Promise<void> => {
   if (typeof ns.args[0] !== "string") {
@@ -17,7 +17,7 @@ export const main = async (ns: NS): Promise<void> => {
     );
     return ns.exit();
   }
- 
+
   const target = ns.args[0];
   const hostname = ns.getHostname();
 
@@ -71,4 +71,4 @@ export const main = async (ns: NS): Promise<void> => {
       ns.tprint(`WARN [${hostname}] Failed a hacking attempt`);
     }
   }
-}
+};

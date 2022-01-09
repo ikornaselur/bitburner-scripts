@@ -1,4 +1,4 @@
-import { NS } from 'bitburner';
+import { NS } from "bitburner";
 import { NODES } from "/scripts/constants";
 
 const MONEY_MAP = {
@@ -67,7 +67,6 @@ const MONEY_MAP = {
   "ecorp": "$1.47T",
 };
 
-
 export const executeHyper = (ns: NS, server: string, target: string): void => {
   const serverRam = ns.getServerMaxRam(server);
   const ramReq = ns.getScriptRam("/scripts/hyper/runner.js");
@@ -77,7 +76,6 @@ export const executeHyper = (ns: NS, server: string, target: string): void => {
 
   ns.exec("/scripts/hyper/runner.js", server, threads, target);
 };
-
 
 export const main = async (ns: NS): Promise<void> => {
   if (typeof ns.args[0] !== "number") {
@@ -132,4 +130,4 @@ export const main = async (ns: NS): Promise<void> => {
     targetIdx++;
     await ns.sleep(250);
   }
-}
+};

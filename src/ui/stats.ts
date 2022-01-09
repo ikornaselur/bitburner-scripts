@@ -1,13 +1,11 @@
-import { NS } from 'bitburner';
+import { NS } from "bitburner";
 import { NODES } from "/scripts/constants.js";
 import { humanReadableMoney, humanReadable } from "/scripts/utils/format";
 import { getStatus, NodeStatus } from "/scripts/utils/status";
 
-
 interface Nodes {
-  [Key: string]: NodeStatus,
+  [Key: string]: NodeStatus;
 }
-
 
 const formatStatus = (ns: NS, data: NodeStatus): string => {
   const theme = ns.ui.getTheme();
@@ -40,7 +38,7 @@ const formatStatus = (ns: NS, data: NodeStatus): string => {
 
   if (data.endTime && data.startTime) {
     const elapsed = Date.now() - data.startTime;
-    let progress = ((elapsed / (data.endTime - data.startTime)) * 100)
+    let progress = (elapsed / (data.endTime - data.startTime)) * 100;
     if (progress > 100) {
       progress = 100;
     }
@@ -48,7 +46,7 @@ const formatStatus = (ns: NS, data: NodeStatus): string => {
   }
 
   return `<span style='color: ${colour};'>${body}</span>`;
-}
+};
 
 const updateUI = (ns: NS, nodes: Nodes): void => {
   const doc = globalThis["document"];
@@ -80,7 +78,7 @@ const updateUI = (ns: NS, nodes: Nodes): void => {
 
   hook0.innerHTML = headers.join(" <br/>");
   hook1.innerHTML = values.join(" <br/>");
-}
+};
 
 export const main = async (ns: NS): Promise<void> => {
   ns.disableLog("sleep");
@@ -108,4 +106,4 @@ export const main = async (ns: NS): Promise<void> => {
 
     await ns.sleep(1000);
   }
-}
+};

@@ -1,6 +1,6 @@
-import { NS } from 'bitburner';
+import { NS } from "bitburner";
 import { humanReadableMoney } from "/scripts/utils/format";
-import { updateStatus } from '/scripts/utils/status';
+import { updateStatus } from "/scripts/utils/status";
 
 const WEAKEN = "/scripts/attack/late/weaken.js";
 const GROW = "/scripts/attack/late/grow.js";
@@ -12,10 +12,10 @@ const getAvailableRam = (ns: NS): number => {
   const maxRam = ns.getServerMaxRam(hostname);
   const usedRam = ns.getServerUsedRam(hostname);
   return maxRam - usedRam - 5; // Leave ~5GB additional for ad-hoc scripts
-}
+};
 
 export const main = async (ns: NS): Promise<void> => {
-  if (typeof ns.args[0] !== 'string') {
+  if (typeof ns.args[0] !== "string") {
     ns.tprint("ERROR Missing target argument");
     return ns.exit();
   }
@@ -189,4 +189,4 @@ export const main = async (ns: NS): Promise<void> => {
       }
     }
   }
-}
+};

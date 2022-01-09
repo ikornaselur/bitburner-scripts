@@ -1,6 +1,5 @@
-import { NS } from 'bitburner';
+import { NS } from "bitburner";
 import { updateStatus } from "/scripts/utils/status";
-
 
 const HACK = "/scripts/hyper/hack.js";
 
@@ -10,15 +9,16 @@ const getAvailableRam = (ns: NS): number => {
   const maxRam = ns.getServerMaxRam(hostname);
   const usedRam = ns.getServerUsedRam(hostname);
   return maxRam - usedRam - 5; // Leave ~5GB additional for ad-hoc scripts
-}
+};
 
 const MONEY_THRESH = 0.75;
 
 export const main = async (ns: NS): Promise<void> => {
-    if (typeof ns.args[0] !== "string") {
+  if (typeof ns.args[0] !== "string") {
     ns.tprint("Usage: hack.js <target>");
     ns.tprint("Example: hack.js n00dles -> Start hacking n00dles,");
-    ns.tprint("         assumes other nodes are weakening and growing the server"
+    ns.tprint(
+      "         assumes other nodes are weakening and growing the server"
     );
     return ns.exit();
   }
@@ -70,5 +70,4 @@ export const main = async (ns: NS): Promise<void> => {
     await ns.sleep(hackTime + 10);
     await updateStatus(ns, hostname, "Idle");
   }
-}
-
+};

@@ -1,4 +1,4 @@
-import { NS } from 'bitburner';
+import { NS } from "bitburner";
 import { humanReadableMoney, humanReadable } from "/scripts/utils/format";
 
 export const main = async (ns: NS): Promise<void> => {
@@ -32,4 +32,4 @@ export const main = async (ns: NS): Promise<void> => {
     }
     await ns.sleep(1000);
   }
-}
+};

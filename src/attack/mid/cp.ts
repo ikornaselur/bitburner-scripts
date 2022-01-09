@@ -1,4 +1,4 @@
-import { NS } from 'bitburner';
+import { NS } from "bitburner";
 import { NODES } from "/scripts/constants";
 
 // TODO: Replace to make dynamic
@@ -78,7 +78,6 @@ export const executeFocus = (ns: NS, server: string, target: string): void => {
   ns.exec("/scripts/focus-attack.js", server, threads, target);
 };
 
-
 export const main = async (ns: NS): Promise<void> => {
   if (typeof ns.args[0] !== "number") {
     ns.tprint("Usage: cp.js <targetIdx>");
@@ -132,10 +131,7 @@ export const main = async (ns: NS): Promise<void> => {
       `[${server}] Copying focus script to attack ${target} (${MONEY_MAP[target]})`
     );
     await ns.scp(
-      [
-        "/scripts/utils/format.js",
-        "/scripts/attack/mid/attack.js",
-      ],
+      ["/scripts/utils/format.js", "/scripts/attack/mid/attack.js"],
       "home",
       server
     );
@@ -145,4 +141,4 @@ export const main = async (ns: NS): Promise<void> => {
     targetIdx++;
     await ns.sleep(100);
   }
-}
+};
