@@ -1,5 +1,5 @@
 import { SERVERS_MAP } from "/scripts/constants";
-import { NS } from 'bitburner';
+import { NS } from "bitburner";
 
 export const main = async (ns: NS) => {
   const hackTools = [
@@ -34,5 +34,4 @@ export const main = async (ns: NS) => {
       }
     }
   }
-}
-
+};

@@ -11,11 +11,11 @@ export const humanReadable = (value: number, precision = 2) => {
   }
 
   return `${value.toFixed(precision)}${postfixes[idx]}`;
-}
+};
 
 export const humanReadableMoney = (value: number, precision = 2) => {
   return `$${humanReadable(value, precision)}`;
-}
+};
 
 export const humanReadableRAM = (value: number, precision = 1) => {
   const postfixes = ["GB", "TB", "PB", "EB"];
@@ -30,4 +30,4 @@ export const humanReadableRAM = (value: number, precision = 1) => {
   }
 
   return `${value.toFixed(precision)}${postfixes[idx]}`;
-}
+};

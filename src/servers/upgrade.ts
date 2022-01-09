@@ -1,11 +1,8 @@
-import { NS } from 'bitburner';
+import { NS } from "bitburner";
 import { NODES } from "/scripts/constants";
-import {
-  humanReadableMoney,
-  humanReadableRAM,
-} from "/scripts/utils/format";
+import { humanReadableMoney, humanReadableRAM } from "/scripts/utils/format";
 
-const getLowestSpec = (ns: NS): { server: string; lowestRAM: number; } => {
+const getLowestSpec = (ns: NS): { server: string; lowestRAM: number } => {
   let i = 0;
   let lowestRAM = 1024 * 1024;
   let server = NODES[i];
@@ -24,14 +21,14 @@ const getLowestSpec = (ns: NS): { server: string; lowestRAM: number; } => {
   }
 
   return result;
-}
+};
 
 /** @param {NS} ns **/
 export const main = async (ns: NS): Promise<void> => {
   if (typeof ns.args[0] !== "number") {
-    ns.tprint("Usage: upgrade.js <RAM> [TB]")
-    ns.tprint("Example: upgrade.js 64 -> Upgrades servers to at least 64GB")
-    ns.tprint("Example: upgrade.js 32 TB -> Upgrades servers to at least 32TB")
+    ns.tprint("Usage: upgrade.js <RAM> [TB]");
+    ns.tprint("Example: upgrade.js 64 -> Upgrades servers to at least 64GB");
+    ns.tprint("Example: upgrade.js 32 TB -> Upgrades servers to at least 32TB");
     return ns.exit();
   }
 
@@ -77,4 +74,4 @@ export const main = async (ns: NS): Promise<void> => {
 
     await ns.sleep(200);
   }
-}
+};

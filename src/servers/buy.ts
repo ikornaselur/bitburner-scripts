@@ -1,12 +1,12 @@
 import { NODES } from "/scripts/constants";
 import { humanReadableMoney, humanReadableRAM } from "/scripts/utils/format";
-import { NS } from 'bitburner';
+import { NS } from "bitburner";
 
 export const main = async (ns: NS): Promise<void> => {
   if (typeof ns.args[0] !== "number") {
-    ns.tprint("Usage: buy.js <RAM> [TB]")
-    ns.tprint("Example: buy.js 64 -> Buys 64GB servers")
-    ns.tprint("Example: buy.js 32 TB -> Buys 32TB servers")
+    ns.tprint("Usage: buy.js <RAM> [TB]");
+    ns.tprint("Example: buy.js 64 -> Buys 64GB servers");
+    ns.tprint("Example: buy.js 32 TB -> Buys 32TB servers");
     return ns.exit();
   }
 
@@ -51,5 +51,4 @@ export const main = async (ns: NS): Promise<void> => {
       i++;
     }
   }
-}
-
+};
