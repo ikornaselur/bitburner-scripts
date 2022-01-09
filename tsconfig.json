@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2021",
+    "module": "ES2020",
+    "rootDir": "src",
+    "baseUrl": "src",
+    "paths": {
+      "/scripts/*": ["*"],
+      "bitburner": [
+        "/Users/axel/Repos/bitburner/src/ScriptEditor/NetscriptDefinitions.d.ts"
+      ]
+    },
+    "outDir": "dist/scripts/",
+    "moduleResolution": "node",
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true
+  }
+}

@@ -6,3 +6,9 @@ prettier:
 
 lint:
 	npm run lint
+
+clean:
+	rm -rf ./dist
+
+build: clean
+	npx tsc
