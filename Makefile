@@ -12,3 +12,6 @@ clean:
 
 build: clean
 	npx tsc
+
+deploy: build
+	python deploy.py
