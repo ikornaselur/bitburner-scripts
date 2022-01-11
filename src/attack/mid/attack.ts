@@ -4,7 +4,7 @@ import { humanReadableMoney } from "/scripts/utils/format";
 const getCurrentThreads = (ns: NS): number => {
   const ps = ns.ps(ns.getHostname());
   const current = ps.filter(
-    (process) => process.filename.indexOf("focus-attack.js") > -1
+    (process) => process.filename.indexOf("mid/attack.js") > -1
   )[0];
   return current.threads;
 };

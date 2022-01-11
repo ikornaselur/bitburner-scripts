@@ -67,14 +67,15 @@ const MONEY_MAP = {
   "ecorp": "$1.47T",
 };
 
-export const executeHyper = (ns: NS, server: string, target: string): void => {
+export const executeLateAttack = (ns: NS, server: string, target: string): void => {
+  const runner_script = "/scripts/attack/late/runner.js"
   const serverRam = ns.getServerMaxRam(server);
-  const ramReq = ns.getScriptRam("/scripts/hyper/runner.js");
+  const ramReq = ns.getScriptRam(runner_script);
   const threads = Math.floor(serverRam / ramReq) / 2;
 
   ns.killall(server);
 
-  ns.exec("/scripts/hyper/runner.js", server, threads, target);
+  ns.exec(runner_script, server, threads, target);
 };
 
 export const main = async (ns: NS): Promise<void> => {
@@ -108,7 +109,7 @@ export const main = async (ns: NS): Promise<void> => {
     }
 
     ns.tprint(
-      `[${server}] Copying focus script to attack ${target} (${MONEY_MAP[target]})`
+      `[${server}] Copying later script to attack ${target} (${MONEY_MAP[target]})`
     );
     await ns.scp(
       [
@@ -125,7 +126,7 @@ export const main = async (ns: NS): Promise<void> => {
       server
     );
 
-    executeHyper(ns, server, target);
+    executeLateAttack(ns, server, target);
     serverIdx++;
     targetIdx++;
     await ns.sleep(250);

@@ -1,7 +1,7 @@
 import { NS } from "bitburner";
 import { updateStatus } from "/scripts/utils/status";
 
-const HACK = "/scripts/hyper/hack.js";
+const HACK = "/scripts/attack/late/hack.js";
 
 const getAvailableRam = (ns: NS): number => {
   // Calculate number of threads possible for weaken

@@ -52,6 +52,7 @@ export const main = async (ns: NS): Promise<void> => {
 
     const availMem = ns.getServerMaxRam(server);
     executeAttack(ns, server, target, availMem);
+    await ns.sleep(10);
   }
 
   if (ns.args[1] === "--nodes") {
@@ -65,6 +66,7 @@ export const main = async (ns: NS): Promise<void> => {
 
       const availMem = ns.getServerMaxRam(node);
       executeAttack(ns, node, target, availMem);
+      await ns.sleep(10);
     }
   }
 };

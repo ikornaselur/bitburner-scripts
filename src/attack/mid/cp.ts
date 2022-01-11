@@ -69,13 +69,14 @@ const MONEY_MAP = {
 };
 
 export const executeFocus = (ns: NS, server: string, target: string): void => {
+  const attack_script = "/scripts/attack/mid/attack.js"
   const serverRam = ns.getServerMaxRam(server);
-  const ramReq = ns.getScriptRam("/scripts/focus-attack.js");
+  const ramReq = ns.getScriptRam(attack_script);
   const threads = Math.floor(serverRam / ramReq);
 
   ns.killall(server);
 
-  ns.exec("/scripts/focus-attack.js", server, threads, target);
+  ns.exec(attack_script, server, threads, target);
 };
 
 export const main = async (ns: NS): Promise<void> => {
