@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier scripts src --write",
-    "lint": "eslint scripts src"
+    "format": "prettier src --write",
+    "lint": "eslint src"
   },
   "author": "",
   "license": "ISC",
