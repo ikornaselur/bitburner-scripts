@@ -25,6 +25,7 @@ const SCRIPTS = [
   "ui/base.js",
   "ui/monitor.js",
   "ui/serv-stats.js",
+  "ui/port-stats.js",
   "update.js",
   "upgrade-servers.js",
   "utils.js",
