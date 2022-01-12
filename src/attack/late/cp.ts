@@ -67,8 +67,12 @@ const MONEY_MAP = {
   "ecorp": "$1.47T",
 };
 
-export const executeLateAttack = (ns: NS, server: string, target: string): void => {
-  const runner_script = "/scripts/attack/late/runner.js"
+export const executeLateAttack = (
+  ns: NS,
+  server: string,
+  target: string
+): void => {
+  const runner_script = "/scripts/attack/late/runner.js";
   const serverRam = ns.getServerMaxRam(server);
   const ramReq = ns.getScriptRam(runner_script);
   const threads = Math.floor(serverRam / ramReq) / 2;

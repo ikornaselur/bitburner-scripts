@@ -1,4 +1,4 @@
-import { NS } from 'bitburner';
+import { NS } from "bitburner";
 import { humanReadableRAM } from "/scripts/utils/format";
 
 export const main = async (ns: NS): Promise<void> => {
@@ -20,4 +20,4 @@ export const main = async (ns: NS): Promise<void> => {
       ns.tprint(val);
     }
   }
-}
+};

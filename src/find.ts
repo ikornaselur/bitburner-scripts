@@ -50,7 +50,9 @@ const find = async (
 export const main = async (ns: NS): Promise<void> => {
   if (typeof ns.args[0] !== "string") {
     ns.tprint("Usage: find.js <target>");
-    ns.tprint("Example: find.js The-Cave -> Returns the path to connect to The-Cave");
+    ns.tprint(
+      "Example: find.js The-Cave -> Returns the path to connect to The-Cave"
+    );
     ns.tprint("If 'backdoor' is provided as target, list all faction servers");
     return ns.exit();
   }
@@ -67,4 +69,4 @@ export const main = async (ns: NS): Promise<void> => {
     }
     await find(ns, "home", target, [], ["home"], false);
   }
-}
+};

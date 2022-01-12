@@ -67,7 +67,7 @@ export const main = async (ns: NS): Promise<void> => {
       endTime: Date.now() + hackTime,
     });
     ns.run(HACK, hackThreads, target);
-    await ns.sleep(hackTime + 10);
+    await ns.sleep(hackTime + 100);
     await updateStatus(ns, hostname, "Idle");
   }
 };

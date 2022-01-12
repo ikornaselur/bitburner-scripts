@@ -1,4 +1,4 @@
-import { NS } from 'bitburner';
+import { NS } from "bitburner";
 import { NODES } from "/scripts/constants.js";
 
 export const main = async (ns: NS): Promise<void> => {
@@ -34,4 +34,4 @@ export const main = async (ns: NS): Promise<void> => {
     }
     await ns.sleep(100);
   }
-}
+};
