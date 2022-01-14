@@ -113,7 +113,9 @@ export const main = async (ns: NS): Promise<void> => {
 
     if (!sequential) {
       if (weakenRam < availableRam * 0.2) {
-        ns.tprint(`WARN [${hostname}] Not enough RAM to parallel attack server!`);
+        ns.tprint(
+          `WARN [${hostname}] Not enough RAM to parallel attack server!`
+        );
         ns.tprint(`WARN [${hostname}] Switching to sequential mode`);
         sequential = true;
         continue;

@@ -1,11 +1,11 @@
 import { NS } from "bitburner";
 
-const TO_KILL = ['monitor.js', 'hack.js'];
+const TO_KILL = ["monitor.js", "hack.js"];
 
 export const main = async (ns: NS): Promise<void> => {
   for (const script of ns.ps()) {
     for (const toKill of TO_KILL) {
-      if (script.filename.indexOf(toKill) > -1){
+      if (script.filename.indexOf(toKill) > -1) {
         ns.kill(script.pid);
       }
     }

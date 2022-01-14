@@ -132,7 +132,12 @@ export const main = async (ns: NS): Promise<void> => {
       `[${server}] Copying focus script to attack ${target} (${MONEY_MAP[target]})`
     );
     await ns.scp(
-      ["/scripts/utils/format.js", "/scripts/attack/mid/attack.js"],
+      [
+        "/scripts/utils/format.js",
+        "/scripts/ui/log-window.js",
+        "/scripts/constants.js",
+        "/scripts/attack/mid/attack.js",
+      ],
       "home",
       server
     );

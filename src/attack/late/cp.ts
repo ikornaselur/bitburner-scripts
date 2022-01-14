@@ -120,6 +120,7 @@ export const main = async (ns: NS): Promise<void> => {
         "/scripts/constants.js",
         "/scripts/utils/format.js",
         "/scripts/utils/status.js",
+        "/scripts/ui/log-window.js",
         "/scripts/attack/late/runner.js",
         "/scripts/attack/late/weaken.js",
         "/scripts/attack/late/hack.js",

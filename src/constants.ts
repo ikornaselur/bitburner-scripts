@@ -81,6 +81,7 @@ export const SERVERS = Object.values(SERVERS_MAP).flat();
 
 export enum Ports {
   STATUS = 1,
+  ATTACK_LOG = 2,
 }
 
 export const NODES = [

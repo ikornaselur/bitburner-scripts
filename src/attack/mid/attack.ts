@@ -1,5 +1,6 @@
 import { NS } from "bitburner";
 import { humanReadableMoney } from "/scripts/utils/format";
+import { publishLog } from "/scripts/ui/log-window";
 
 const getCurrentThreads = (ns: NS): number => {
   const ps = ns.ps(ns.getHostname());
@@ -64,9 +65,17 @@ export const main = async (ns: NS): Promise<void> => {
       threads: Math.min(requiredHackThreads, getCurrentThreads(ns)),
     });
     if (stolen > 0) {
+      /*
       ns.tprint(
         `SUCCESS [${hostname}] $$$ Stole ${humanReadableMoney(stolen)} $$$`
       );
+      */
+      await publishLog(ns, {
+        node: hostname,
+        target,
+        amount: stolen,
+        message: `Stole ${humanReadableMoney(stolen)}`,
+      });
     } else {
       ns.tprint(`WARN [${hostname}] Failed a hacking attempt`);
     }
