@@ -41,6 +41,8 @@ export const main = async (ns: NS): Promise<void> => {
     const serverHackLevel = ns.getServerRequiredHackingLevel(target);
     if (serverHackLevel > hackLevel) {
       ns.tprint(`WARN [${target}] Hack level too high (${serverHackLevel})`);
+    } else if (!ns.hasRootAccess(target)) {
+      ns.tprint(`ERROR [${target}] Root access required`);
     } else {
       ns.tprint(
         `INFO [${target}] Hack level low enough (${serverHackLevel}). Installing backdoor...`

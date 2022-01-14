@@ -21,17 +21,17 @@ const waitForMoney = async (ns: NS, amount: number): Promise<void> => {
 export const main = async (ns: NS): Promise<void> => {
   const charInfo = ns.getPlayer();
 
-  if (!charInfo.tor) {
-    await waitForMoney(ns, COST.TOR);
-    ns.tprint("INFO Buying TOR router");
-    ns.purchaseTor();
-  }
-
   ns.tprint("INFO ensuring root access on all 0-port servers");
   for (const server of SERVERS_MAP[0]) {
     if (!ns.hasRootAccess(server)) {
       ns.nuke(server);
     }
+  }
+
+  if (!charInfo.tor) {
+    await waitForMoney(ns, COST.TOR);
+    ns.tprint("INFO Buying TOR router");
+    ns.purchaseTor();
   }
 
   if (!ns.fileExists("BruteSSH.exe")) {
@@ -44,6 +44,7 @@ export const main = async (ns: NS): Promise<void> => {
     if (!ns.hasRootAccess(server)) {
       ns.brutessh(server);
       ns.nuke(server);
+      ns.tprint(`SUCCESS gained root access on ${server}`);
     }
   }
 
@@ -58,6 +59,7 @@ export const main = async (ns: NS): Promise<void> => {
       ns.brutessh(server);
       ns.ftpcrack(server);
       ns.nuke(server);
+      ns.tprint(`SUCCESS gained root access on ${server}`);
     }
   }
 
@@ -73,6 +75,7 @@ export const main = async (ns: NS): Promise<void> => {
       ns.ftpcrack(server);
       ns.relaysmtp(server);
       ns.nuke(server);
+      ns.tprint(`SUCCESS gained root access on ${server}`);
     }
   }
 
@@ -89,6 +92,7 @@ export const main = async (ns: NS): Promise<void> => {
       ns.relaysmtp(server);
       ns.httpworm(server);
       ns.nuke(server);
+      ns.tprint(`SUCCESS gained root access on ${server}`);
     }
   }
 
@@ -106,6 +110,7 @@ export const main = async (ns: NS): Promise<void> => {
       ns.httpworm(server);
       ns.sqlinject(server);
       ns.nuke(server);
+      ns.tprint(`SUCCESS gained root access on ${server}`);
     }
   }
 };
