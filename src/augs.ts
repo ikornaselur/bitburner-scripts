@@ -3,9 +3,18 @@ import { humanReadableMoney, humanReadable } from "/scripts/utils/format";
 
 const MULT = 1.9;
 
-
 export const main = async (ns: NS): Promise<void> => {
-  const flags: { faction: string } = ns.flags([["faction", "CyberSec"]]);
+  const flags: { faction: string; buy: boolean; help: boolean } = ns.flags([
+    ["faction", "CyberSec"],
+    ["buy", false],
+    ["help", false],
+  ]);
+
+  if (flags.help) {
+    ns.tprint("Usage:");
+    ns.tprint('./augs.js [--faction "Faction Name"] [--buy]');
+    return;
+  }
 
   const augs = ns.getAugmentationsFromFaction(flags.faction);
   const owned = ns.getOwnedAugmentations(true);
@@ -30,19 +39,29 @@ export const main = async (ns: NS): Promise<void> => {
 
   for (const aug of augStats) {
     const cost = aug.cost * Math.pow(MULT, buyCount);
-    let logLevel = 'INFO';
+    let logLevel = "INFO";
     if (totalMoneyRequired > userMoney) {
-      logLevel = 'WARN';
+      logLevel = "WARN";
     }
     if (aug.rep > rep) {
-      logLevel = 'ERROR';
+      logLevel = "ERROR";
     }
+    const buy = flags.buy && logLevel === "INFO";
 
-    totalMoneyRequired += cost
+    totalMoneyRequired += cost;
     ns.tprint(
-      `${logLevel} ${humanReadableMoney(aug.cost)} -> ${humanReadableMoney(cost)} ${aug.name}: (${humanReadable(aug.rep)}) `
+      `${logLevel} ${humanReadableMoney(aug.cost)} -> ${humanReadableMoney(
+        cost
+      )} ${aug.name}: (${humanReadable(aug.rep)}) `
     );
     buyCount += 1;
+    if (buy) {
+      if (ns.purchaseAugmentation(flags.faction, aug.name)) {
+        ns.tprint("SUCCESS Augmentation purchased");
+      } else {
+        ns.tprint("ERROR FAiled to buy augmentation");
+      }
+    }
   }
 
   ns.tprint(`INFO required money: ${humanReadableMoney(totalMoneyRequired)}`);
