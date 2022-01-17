@@ -1,6 +1,6 @@
 import { NS } from "bitburner";
 import { humanReadableMoney } from "/scripts/utils/format";
-import { publishLog } from '/scripts/ui/log-window';
+import { publishLog } from "/scripts/ui/log-window";
 
 export const main = async (ns: NS): Promise<void> => {
   if (typeof ns.args[0] !== "string") {

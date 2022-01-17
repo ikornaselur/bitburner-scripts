@@ -1,6 +1,5 @@
 import { NS } from "bitburner";
 import { Ports } from "/scripts/constants";
-import { humanReadableMoney } from "/scripts/utils/format";
 
 export interface LogEntry {
   node: string;
@@ -32,11 +31,7 @@ export const publishLog = async (
   );
 };
 
-const updateUI = (
-  ns: NS,
-  entries: { [key: string]: AttackLogEntry },
-  total: { [key: string]: number }
-): void => {
+const updateUI = (ns: NS, entries: Array<AttackLogEntry>): void => {
   ns.clearLog();
   const nodeWidth = Math.max(
     ...Object.values(entries).map((entry) => entry.node.length)
@@ -44,25 +39,19 @@ const updateUI = (
   const targetWidth = Math.max(
     ...Object.values(entries).map((entry) => entry.target.length)
   );
-  const totalWidth = 8;
 
   ns.print(
-    `Last Event | ${"Node".padEnd(nodeWidth, " ")} | ${"Target".padEnd(
+    `Timestamp | ${"Node".padEnd(nodeWidth, " ")} | ${"Target".padEnd(
       targetWidth,
       " "
-    )} | ${"Total".padEnd(totalWidth, " ")} | Message`
+    )} | Message`
   );
-  for (const node of Object.keys(entries).sort()) {
-    const entry = entries[node];
-    const nodeTotal = humanReadableMoney(total[node]);
+  for (const entry of entries) {
     ns.print(
-      `${entry.timestamp}   | ${node.padEnd(
+      `${entry.timestamp}  | ${entry.node.padEnd(
         nodeWidth,
         " "
-      )} | ${entry.target.padEnd(targetWidth, " ")} | ${nodeTotal.padEnd(
-        totalWidth,
-        " "
-      )} | ${entry.message}`
+      )} | ${entry.target.padEnd(targetWidth, " ")} | ${entry.message}`
     );
   }
 };
@@ -70,15 +59,17 @@ const updateUI = (
 export const main = async (ns: NS): Promise<void> => {
   ns.disableLog("ALL");
   ns.clearPort(Ports.ATTACK_LOG);
-  const entries: { [key: string]: AttackLogEntry } = {};
-  const total: { [key: string]: number } = {};
+  const flags = ns.flags([["last", 10]]);
+  let entries: Array<AttackLogEntry> = [];
 
   while (true) {
     for await (const logEntry of getAttackLogEntries(ns)) {
-      entries[logEntry.node] = logEntry;
-      total[logEntry.node] = logEntry.amount + (total[logEntry.node] ?? 0);
+      entries.push(logEntry);
     }
-    updateUI(ns, entries, total);
+    if (entries.length > flags.last) {
+      entries = entries.slice(entries.length - flags.last);
+    }
+    updateUI(ns, entries);
     await ns.sleep(100);
   }
 };

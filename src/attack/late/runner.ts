@@ -14,6 +14,30 @@ const getAvailableRam = (ns: NS): number => {
   return maxRam - usedRam - 5; // Leave ~5GB additional for ad-hoc scripts
 };
 
+const getWeakenThreads = (ns: NS, target: string): number => {
+  const cores = ns.getServer().cpuCores;
+  // Run with max threads possible
+  const maxWeakenThreads = Math.floor(
+    getAvailableRam(ns) / ns.getScriptRam(WEAKEN)
+  );
+  const goalWeakenAmount =
+    ns.getServerSecurityLevel(target) - ns.getServerMinSecurityLevel(target);
+
+  let threads = maxWeakenThreads;
+  while (true) {
+    const weakenAmount = ns.weakenAnalyze(threads, cores);
+    const diff = weakenAmount - goalWeakenAmount;
+    if (diff >= 0 && diff < 5) {
+      return threads;
+    }
+    if (diff > 0) {
+      threads /= 2;
+    } else {
+      threads *= 1.5;
+    }
+  }
+};
+
 export const main = async (ns: NS): Promise<void> => {
   if (typeof ns.args[0] !== "string") {
     ns.tprint("ERROR Missing target argument");
@@ -36,10 +60,7 @@ export const main = async (ns: NS): Promise<void> => {
     while (ns.getServerSecurityLevel(target) > minSecurity + 5) {
       prepped = false;
       const weakenTime = ns.getWeakenTime(target);
-      // Run with max threads possible
-      const weakenThreads = Math.floor(
-        getAvailableRam(ns) / ns.getScriptRam(WEAKEN)
-      );
+      const weakenThreads = getWeakenThreads(ns, target);
 
       ns.run(WEAKEN, weakenThreads, target);
       await updateStatus(ns, hostname, "Prepping", {
@@ -121,7 +142,7 @@ export const main = async (ns: NS): Promise<void> => {
         continue;
       }
 
-      const weakenThreads = Math.floor(weakenRam / ns.getScriptRam(WEAKEN));
+      const weakenThreads = getWeakenThreads(ns, target);
       ns.print("weakenThreads: ", weakenThreads);
 
       ns.run(WEAKEN, weakenThreads, target);
@@ -161,9 +182,7 @@ export const main = async (ns: NS): Promise<void> => {
       while (ns.getServerSecurityLevel(target) > minSecurity + 10) {
         const weakenTimeSeq = ns.getWeakenTime(target);
         // Run with max threads possible
-        const weakenThreadsSeq = Math.floor(
-          getAvailableRam(ns) / ns.getScriptRam(WEAKEN)
-        );
+        const weakenThreadsSeq = getWeakenThreads(ns, target);
 
         await updateStatus(ns, hostname, "Weakening", {
           startTime: Date.now(),
