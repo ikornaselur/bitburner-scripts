@@ -2,10 +2,11 @@ import { NS } from "bitburner";
 import { SERVERS, NODES } from "/scripts/constants.js";
 
 const ATTACK_SRC = "/scripts/attack/early/attack.js";
+const CONSTANTS_SRC = "/scripts/constants.js"
 const STATUS_SRC = "/scripts/utils/status.js";
 
 const scpAttackScripts = async (ns: NS, server: string): Promise<void> => {
-  await ns.scp([STATUS_SRC, ATTACK_SRC], "home", server);
+  await ns.scp([STATUS_SRC, CONSTANTS_SRC, ATTACK_SRC], "home", server);
 };
 
 const executeAttack = (
