@@ -111,3 +111,43 @@ export const NODES = [
   "iri",
   "rira",
 ];
+
+export const FACTIONS = [
+  // Early
+  "CyberSec",
+  "Tian Di Hui",
+  "Netburners",
+  // Cities
+  "Sector-12",
+  "Chongqing",
+  "New Tokyo",
+  "Ishima",
+  "Aevum",
+  "Volhaven",
+  // Hacking
+  "NiteSec",
+  "The Black Hand",
+  "BitRunners",
+  // Megacorps
+  "ECorp",
+  "MegaCorp",
+  "KuaiGong International",
+  "Four Sigma",
+  "NWO",
+  "Blade Industries",
+  "OmniTek Incorporated",
+  "Bachman & Associates",
+  "Clarke Incorporated",
+  "Fulcrum Secret Technologies",
+  // Criminal
+  "Slum Snakes",
+  "Tetrads",
+  "Silhouette",
+  "Speakers for the Dead",
+  "The Dark Army",
+  "The Syndicate",
+  // Endgame
+  "The Covenant",
+  "Daedalus",
+  "Illuminati",
+];
