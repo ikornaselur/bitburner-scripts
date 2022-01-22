@@ -15,3 +15,6 @@ build: clean
 
 deploy: build
 	python deploy.py
+
+test:
+	npm test

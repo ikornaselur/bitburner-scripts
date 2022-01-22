@@ -5,7 +5,7 @@ export const humanReadable = (value: number, precision = 2) => {
   while (value >= 1000) {
     value = value / 1000;
     idx += 1;
-    if (idx > postfixes.length) {
+    if (idx + 1 === postfixes.length) {
       break;
     }
   }
@@ -24,7 +24,7 @@ export const humanReadableRAM = (value: number, precision = 1) => {
   while (value >= 1024) {
     value = value / 1024;
     idx += 1;
-    if (idx > postfixes.length) {
+    if (idx + 1 === postfixes.length) {
       break;
     }
   }
