@@ -1,5 +1,4 @@
 import { NS } from "bitburner";
-import { NODES } from "/scripts/constants";
 import { getServers } from "/scripts/utils/servers";
 import { humanReadableMoney } from "/scripts/utils/format";
 
@@ -28,9 +27,14 @@ export const main = async (ns: NS): Promise<void> => {
   }
 
   let targetIdx = ns.args[0];
-  let serverIdx = 0;
 
-  const servers = getServers(ns).sort((a, b) => a.moneyMax - b.moneyMax);
+  const servers = getServers(ns)
+    .filter((server) => server.moneyMax > 0)
+    .sort((a, b) => a.moneyMax - b.moneyMax);
+  const nodes = ns
+    .getPurchasedServers()
+    .map((node) => ns.getServer(node))
+    .sort((a, b) => a.maxRam - b.maxRam);
   const maxVal = servers.length - 25;
 
   if (targetIdx > maxVal) {
@@ -40,17 +44,12 @@ export const main = async (ns: NS): Promise<void> => {
 
   ns.tprint("Copying attack script to servers");
 
-  while (serverIdx < 25) {
+  for (const node of nodes) {
     const target = servers[targetIdx];
-    const server = NODES[serverIdx];
-
-    while (!ns.serverExists(server)) {
-      ns.print("Server not bought yet, sleeping for 10 seconds...");
-      await ns.sleep(10 * 1000);
-    }
+    const hostname = node.hostname;
 
     ns.tprint(
-      `INFO [${server}] Copying later script to attack ${
+      `INFO [${hostname}] Copying later script to attack ${
         target.hostname
       } (${humanReadableMoney(target.moneyMax)})`
     );
@@ -67,11 +66,10 @@ export const main = async (ns: NS): Promise<void> => {
         "/scripts/attack/late/status.js",
       ],
       "home",
-      server
+      hostname
     );
 
-    executeLateAttack(ns, server, target.hostname);
-    serverIdx++;
+    executeLateAttack(ns, hostname, target.hostname);
     targetIdx++;
     await ns.sleep(100);
   }
